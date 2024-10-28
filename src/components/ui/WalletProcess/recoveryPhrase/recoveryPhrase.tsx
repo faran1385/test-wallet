@@ -1,21 +1,33 @@
-import * as bip39 from 'bip39';
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {processComponentBaseArg} from "../WalletProcess";
 import {RecoveryPhraseButton} from "./recoveryPhraseButton/RecoveryPhraseButton";
 import {CopyToClipboardModal} from "./copyToClipboardModal/copyToClipboardModal";
 import {InfoModal} from "./infoModal/infoModal";
+import {useHandlePhrases} from "../../../lib/useHandlePhrases/useHandlePhrases.ts";
+import {AnimatePresence, motion, Variants} from "framer-motion";
+
+const copiedToClipBoardVariant: Variants = {
+    hidden: {
+        y: 50,
+        opacity: 0
+    },
+    intro: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            delay: .5
+
+        }
+    },
+    outro: {
+        y: 50,
+        opacity: 0
+    }
+}
 
 export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
 
-    // length of phrases state
-    const [selectedPhraseCount, setSelectedPhraseCount] = useState<12 | 15 | 24>(12)
-
-    // phrases array
-    const [phrases, setPhrases] = useState({
-        '12': [] as string[],
-        '15': [] as string[],
-        '24': [] as string[]
-    })
+    const {selectedPhraseCount, setSelectedPhraseCount, phrases} = useHandlePhrases()
 
     // opening state of clipboard modal
     const [clipboardModal, setClipboardModal] = useState(false)
@@ -23,14 +35,8 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
     // opening state of info modal
     const [infoModal, setInfoModal] = useState(false)
 
-    // setting phrases
-    useEffect(() => {
-        setPhrases({
-            '12': bip39.generateMnemonic(256 * 12 / 24).split(" "),
-            '15': bip39.generateMnemonic(256 * 15 / 24).split(" "),
-            '24': bip39.generateMnemonic(256).split(" "),
-        })
-    }, []);
+    // copied to clipboard text
+    const [copiedToClipboard, setCopiedToClipboard] = useState(false)
 
     return <>
         <div className="flex items-center h-screen w-full justify-center">
@@ -101,12 +107,28 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
                             }))}
                         </div>
                     </div>
-                    <button
-                        onClick={() => setClipboardModal(true)}
-                        className="text-[#686D74] underline text-[12px] flex justify-center mb-12 mt-3 md:mt-5 md:text-[14px]">
-                        Copy to clipboard
-                    </button>
-
+                    <div className={"relative"}>
+                        <button
+                            onClick={() => setClipboardModal(true)}
+                            className="text-[#686D74] underline text-[12px] flex justify-center mb-12 mt-3 md:mt-5 md:text-[14px]">
+                            Copy to clipboard
+                        </button>
+                        <AnimatePresence>
+                            {copiedToClipboard && <motion.div
+                                variants={copiedToClipBoardVariant}
+                                animate={"intro"}
+                                initial={"hidden"}
+                                exit={"outro"}
+                                transition={{
+                                    duration: .7,
+                                    type: "spring",
+                                    ease: "easeInOut"
+                                }}
+                                className={"absolute  top-[15%] md:top-[20px] -left-1/2 md:left-[-32%] bg-wallet-green shadow-lg min-w-[200px] text-white rounded text-center p-2 w-fit"}>
+                                Copied to clipboard
+                            </motion.div>}
+                        </AnimatePresence>
+                    </div>
                     <div className="w-full flex flex-col pb-3 items-center gap-7 md:gap-12">
                         <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-7">
                             <button
@@ -124,6 +146,7 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
             </div>
         </div>
         <CopyToClipboardModal
+            setCopiedToClipboard={setCopiedToClipboard}
             setClipboardModal={setClipboardModal}
             clipboardModal={clipboardModal}
             phrases={phrases[`${selectedPhraseCount}`]}

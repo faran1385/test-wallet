@@ -11,7 +11,7 @@ export type processComponentBaseArg = {
 
 
 export const WalletProcess = () => {
-    const [process, setProcess] = useState<processType>("recoveryPhrase");
+    const [process, setProcess] = useState<processType>("welcome");
     return <>
         {process === "welcome" ? (
             <WelcomeState key={"welcome"} setProcess={setProcess}/>

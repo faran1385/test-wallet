@@ -4,6 +4,7 @@ import {createPortal} from "react-dom";
 interface CopyToClipboardModalProps {
     clipboardModal: boolean,
     setClipboardModal: React.Dispatch<React.SetStateAction<boolean>>,
+    setCopiedToClipboard: React.Dispatch<React.SetStateAction<boolean>>,
     phrases: string[]
 }
 
@@ -14,7 +15,10 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
 
     const copyHandler = () => {
         T.setClipboardModal(false)
-
+        T.setCopiedToClipboard(true)
+        setTimeout(() => {
+            T.setCopiedToClipboard(false)
+        }, 4000)
         // creating the text to be copied
         let text = ''
         T.phrases.forEach((phrase, i) => {
@@ -69,7 +73,8 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
                         your<br className={"hidden sm:block"}/> wallet and your funds will be compromised.
                     </p>
                 </div>
-                <div className="w-full mt-[30px] flex flex-col-reverse sm:flex-row items-center justify-between gap-7">
+                <div
+                    className="w-full mt-[30px] flex flex-col-reverse sm:flex-row items-center justify-between sm:gap-7 gap-3">
                     <button
                         onClick={copyHandler}
                         className="text-nowrap text-center w-full first-line:text-white duration-300 bg-[#242431] hover:bg-[#282835] rounded-[40px] py-3 text-base font-normal block">
