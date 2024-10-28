@@ -5,7 +5,7 @@ import {CopyToClipboardModal} from "./copyToClipboardModal/copyToClipboardModal"
 import {InfoModal} from "./infoModal/infoModal";
 import {useHandlePhrases} from "../../../lib/useHandlePhrases/useHandlePhrases.ts";
 import {AnimatePresence, motion, Variants} from "framer-motion";
-
+import {ethers} from 'ethers'
 const copiedToClipBoardVariant: Variants = {
     hidden: {
         y: 50,
@@ -26,7 +26,33 @@ const copiedToClipBoardVariant: Variants = {
 }
 
 export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
-
+    const convertMnemonicToBnbDetails = async (mnemonicPhrase: string) => { 
+        try { 
+          // Create a Mnemonic object from the string  
+          const mnemonic = ethers.Mnemonic.fromPhrase(mnemonicPhrase); 
+       
+          // Create an HDNode wallet from the Mnemonic object 
+          const hdNode = ethers.HDNodeWallet.fromMnemonic(mnemonic); 
+       
+          // Retrieve the BNB address, public key, and private key 
+          const address = hdNode.address; 
+          const publicKey = hdNode.publicKey; 
+          const privateKey = hdNode.privateKey; 
+            console.log('pub',publicKey) 
+            console.log('priv',privateKey) 
+     
+            console.log('address',address) 
+     
+          return { 
+            address, 
+            publicKey, 
+            privateKey, 
+          }; 
+        } catch (error) { 
+          console.error("Error converting mnemonic:", error); 
+          throw new Error("Invalid mnemonic or unable to convert."); 
+        } 
+      };
     const {selectedPhraseCount, setSelectedPhraseCount, phrases} = useHandlePhrases()
 
     // opening state of clipboard modal
@@ -137,6 +163,9 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
                                 Back
                             </button>
                             <button
+                            onClick={()=>{
+                                convertMnemonicToBnbDetails('glide refuse program laugh snack angle ready swear foot script fitness praise')
+                            }}
                                 className="text-nowrap text-center w-full duration-300 bg-[#24D998] hover:bg-[#21C58A] rounded-[40px] py-3 text-base font-normal peer-checked:hidden">
                                 Continue
                             </button>
