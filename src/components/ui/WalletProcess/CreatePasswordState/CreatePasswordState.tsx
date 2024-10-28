@@ -1,7 +1,5 @@
-"use client"
-import Image from "next/image";
 import React, {useState} from "react";
-import {processComponentBaseArg} from "@/app/components/ui/WalletProcess/WalletProcess";
+import {processComponentBaseArg} from "../WalletProcess.tsx";
 import axios from "axios";
 
 
@@ -10,6 +8,7 @@ const hasSpecialCharsPattern = /[!@#$%^&*(),.?":{}|<>]/
 const hasNumbersPattern = /\d/
 
 export const CreatePasswordState: React.FC<processComponentBaseArg> = (T) => {
+
     const [submitRequirements, setSubmitRequirements] = useState({
         includesTenChars: false,
         includesNumbers: false,
@@ -45,12 +44,13 @@ export const CreatePasswordState: React.FC<processComponentBaseArg> = (T) => {
         if (isValid && !loading) {
             setLoading(true)
             try {
-                const res = await axios.post(process.env.NEXT_PUBLIC_BASE_URL + "/Users/Register", {
+                const res = await axios.post("https://api.hero.io" + "/Users/Register", {
                     password
                 })
                 if (res.status === 200) {
                     setLoading(false)
                     localStorage.setItem("refreshToken", res.data.result.refreshToken)
+                    T.setProcess("recoveryPhrase")
                 }
             } catch (e: any) {
                 console.log(e)
@@ -60,13 +60,13 @@ export const CreatePasswordState: React.FC<processComponentBaseArg> = (T) => {
 
     return <div className="flex md:items-center min-h-screen bg-[#EBEEF1]">
         <div
-            className="max-w-[530px] pb-6 sm:px-6 px-4 rounded-[12px] mx-auto sm:bg-[#ffffff]"
+            className="max-w-[530px] p-6 rounded-[12px] mx-auto sm:bg-[#ffffff]"
         >
             <div
-                className="w-full flex justify-between  items-center pt-6"
+                className="w-full flex justify-between md:justify-center items-center"
             >
                 <button onClick={() => T.setProcess("welcome")}>
-                    <Image
+                    <img
                         width={9}
                         height={14}
                         src={"/svg/global/arrow-left.svg"}
@@ -75,17 +75,14 @@ export const CreatePasswordState: React.FC<processComponentBaseArg> = (T) => {
                     />
                 </button>
                 <div
-                    className="flex items-center justify-center gap-4 *:cursor-pointer *:h-[9px] *:w-[9px]"
+                    className="flex mx-auto items-center justify-center gap-4 *:h-[9px] *:w-[9px]"
                 >
-                    <div className="circle rounded-full bg-[#1B65FF] sm:bg-[#24D998]"></div>
+                    <div onClick={() => T.setProcess("welcome")}
+                         className="circle cursor-pointer rounded-full bg-[#1B65FF] sm:bg-[#24D998]"></div>
                     <div className="circle rounded-full bg-[#1B65FF] sm:bg-[#24D998]"></div>
                     <div className="circle rounded-full bg-[#BDC7D3]"></div>
                     <div className="circle rounded-full bg-[#BDC7D3]"></div>
                 </div>
-                <span
-                    className="cursor-pointer font-medium text-xl text-[#686D74]  flex justify-end"
-                >?</span
-                >
             </div>
 
             <div className="md:mt-[58px] mt-[110px] w-full">
@@ -112,9 +109,9 @@ export const CreatePasswordState: React.FC<processComponentBaseArg> = (T) => {
                             placeholder="Minimum of 10 characters"
                             type={hidePassword ? 'password' : 'text'}
                             onKeyUp={passwordInputKeyUpHandler}
-                            className="pl-4 bg-[#F8F9FB] w-full rounded-[48px] placeholder:text-[14px] placeholder:text-[#686D74] sm:placeholder:font-bold h-[50px] focus:border-green-500"
+                            className="pl-4 bg-[#F8F9FB] w-full rounded-[48px] placeholder:text-[14px] placeholder:text-[#686D74] sm:placeholder:font-bold h-[50px] outline-0 focus:border-green-500"
                         />
-                        <Image
+                        <img
                             width={22}
                             height={18}
                             onClick={() => setHidePassword(!hidePassword)}
@@ -144,9 +141,9 @@ export const CreatePasswordState: React.FC<processComponentBaseArg> = (T) => {
                             onChange={(e) => setReEnteredPassword(e.target.value)}
                             placeholder="Re-enter your set password"
                             type={hideReEnteredPassword ? 'password' : 'text'}
-                            className="pl-4 bg-[#F8F9FB] w-full placeholder:text-[14px] placeholder:text-[#686D74] sm:placeholder:font-bold rounded-[48px]  h-[50px]"
+                            className="pl-4 bg-[#F8F9FB] w-full placeholder:text-[14px] placeholder:text-[#686D74] sm:placeholder:font-bold rounded-[48px] outline-0  h-[50px]"
                         />
-                        <Image
+                        <img
                             width={22}
                             height={18}
                             onClick={() => setHideReEnteredPassword(!hideReEnteredPassword)}

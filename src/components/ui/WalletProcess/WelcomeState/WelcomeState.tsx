@@ -1,8 +1,5 @@
-"use client"
-
-import Image from "next/image";
 import React, {useState} from "react";
-import {processComponentBaseArg} from "@/app/components/ui/WalletProcess/WalletProcess";
+import {processComponentBaseArg} from "../WalletProcess";
 
 
 export const WelcomeState:React.FC<processComponentBaseArg> = (T) => {
@@ -19,29 +16,23 @@ export const WelcomeState:React.FC<processComponentBaseArg> = (T) => {
                 <div
                     className="w-full flex justify-between md:justify-center items-center"
                 >
-                    <Image
-                        width={9}
-                        height={14}
+                    <img
                         src={"/svg/global/arrow-left.svg"}
                         alt=""
                         className="cursor-pointer md:hidden"
                     />
                     <div
-                        className="flex items-center justify-center gap-4 *:cursor-pointer *:h-[9px] *:w-[9px]"
+                        className="flex mx-auto items-center justify-center gap-4 *:h-[9px] *:w-[9px]"
                     >
                         <div className="circle rounded-full bg-[#1B65FF] sm:bg-[#24D998]"></div>
                         <div className="circle rounded-full bg-[#BDC7D3]"></div>
                         <div className="circle rounded-full bg-[#BDC7D3]"></div>
                         <div className="circle rounded-full bg-[#BDC7D3]"></div>
                     </div>
-                    <span
-                        className="cursor-pointer font-medium text-xl text-[#686D74] md:hidden"
-                    >?</span
-                    >
                 </div>
 
                 <div className="flex flex-col items-center justify-center gap-3">
-                    <Image
+                    <img
                         src={"/imgs/Fly.png"}
                         width={248}
                         height={160}
@@ -54,11 +45,6 @@ export const WelcomeState:React.FC<processComponentBaseArg> = (T) => {
                         In the next steps, you’ll be able to create <br/>
                         your own self-custody wallet or import an existing one.
                     </p>
-
-                    <div className="flex gap-2 md:hidden">
-                        <div className="w-[30px] h-[5px] bg-[#0042E0] rounded-md"></div>
-                        <div className="w-[8px] h-[5px] bg-[#868D96] rounded-md"></div>
-                    </div>
                 </div>
 
                 <div className="w-full flex flex-col items-center gap-7 md:gap-12">
