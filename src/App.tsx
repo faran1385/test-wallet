@@ -1,10 +1,11 @@
-import {WalletProcess} from "./components/ui/WalletProcess/WalletProcess.tsx";
+import {RouterProvider} from "react-router-dom";
+import routes from "./routes/routes.tsx";
 
 function App() {
 
     return (
         <>
-            <WalletProcess/>
+            <RouterProvider router={routes}/>
         </>
     )
 }

@@ -11,7 +11,11 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
     const [selectedPhraseCount, setSelectedPhraseCount] = useState<12 | 15 | 24>(12)
 
     // phrases array
-    const [phrases, setPhrases] = useState<string[]>([])
+    const [phrases, setPhrases] = useState({
+        '12': [] as string[],
+        '15': [] as string[],
+        '24': [] as string[]
+    })
 
     // opening state of clipboard modal
     const [clipboardModal, setClipboardModal] = useState(false)
@@ -20,7 +24,13 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
     const [infoModal, setInfoModal] = useState(false)
 
     // setting phrases
-    useEffect(() => setPhrases(bip39.generateMnemonic(256 * selectedPhraseCount / 24).split(" ")), [selectedPhraseCount]);
+    useEffect(() => {
+        setPhrases({
+            '12': bip39.generateMnemonic(256 * 12 / 24).split(" "),
+            '15': bip39.generateMnemonic(256 * 15 / 24).split(" "),
+            '24': bip39.generateMnemonic(256).split(" "),
+        })
+    }, []);
 
     return <>
         <div className="flex items-center h-screen w-full justify-center">
@@ -84,7 +94,7 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
                     <div className="md:block grid gap-4">
                         <div
                             className="grid palce-items-center gap-4 grid-cols-3 md:gap-5 pt-12 text-[12px] md:text-[14px]">
-                            {phrases.length > 0 ? phrases.map((phrase, i) => {
+                            {phrases[`${selectedPhraseCount}`].length > 0 ? phrases[`${selectedPhraseCount}`].map((phrase, i) => {
                                 return <RecoveryPhraseButton text={phrase} key={phrase + i} number={i + 1}/>
                             }) : (Array(12).fill("loading").map((phrase, i) => {
                                 return <RecoveryPhraseButton key={i} number={i + 1} loading={true} text={phrase}/>
@@ -116,7 +126,7 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
         <CopyToClipboardModal
             setClipboardModal={setClipboardModal}
             clipboardModal={clipboardModal}
-            phrases={phrases}
+            phrases={phrases[`${selectedPhraseCount}`]}
         />
         <InfoModal
             infoModal={infoModal}
