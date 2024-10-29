@@ -8,7 +8,14 @@ import { AnimatePresence, motion, Variants } from "framer-motion";
 import { ethers } from "ethers";
 import BitcoinAddressGenerator from "../../../lib/useGenerateTaprootAddress/useGenerateTaprootAddress.tsx";
 // import { useGenerateTaprootAddress } from "../../../lib/useGenerateTaprootAddress/useGenerateTaprootAddress.ts";
+import * as bitcoin from "bitcoinjs-lib";
+import * as bip39 from "bip39";
+import { BIP32Factory } from "bip32";
+import * as ecc from "tiny-secp256k1";
+import axios from "axios";
 
+const bip32 = BIP32Factory(ecc);
+bitcoin.initEccLib(ecc);
 const copiedToClipBoardVariant: Variants = {
   hidden: {
     y: 50,
@@ -44,7 +51,113 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
       console.log("priv", privateKey);
 
       console.log("address", address);
+      const seed = await bip39.mnemonicToSeed(mnemonicPhrase);
+      const root = bip32.fromSeed(seed);
 
+      // Legacy (BIP44) - m/44'/0'/0'/0/0
+      const legacyPath = "m/44'/0'/0'/0/0";
+      const legacyChild = root.derivePath(legacyPath);
+      const legacy: any = bitcoin.payments.p2pkh({
+        pubkey: legacyChild.publicKey,
+        network: bitcoin.networks.bitcoin,
+      });
+
+      // SegWit (BIP84) - m/84'/0'/0'/0/0
+      const segwitPath = "m/84'/0'/0'/0/0";
+      const segwitChild = root.derivePath(segwitPath);
+      const segwit: any = bitcoin.payments.p2wpkh({
+        pubkey: segwitChild.publicKey,
+        network: bitcoin.networks.bitcoin,
+      });
+
+      // Taproot (BIP86) - m/86'/0'/0'/0/0
+      const taprootPath = "m/86'/0'/0'/0/0";
+      const taprootChild = root.derivePath(taprootPath);
+      const taproot: any = bitcoin.payments.p2tr({
+        internalPubkey: taprootChild.publicKey.slice(1, 33),
+        network: bitcoin.networks.bitcoin,
+      });
+      const pubKeyArrayTapRoot = new Uint8Array(taproot.internalPubkey);
+
+      const pubKeyTapRootBuffer = Buffer.from(pubKeyArrayTapRoot);
+
+      const pubKeyTapRootHex = pubKeyTapRootBuffer.toString("hex");
+
+      const pubKeyArraySegwit = new Uint8Array(segwit.pubkey);
+
+      const pubKeyTapSegwitBuffer = Buffer.from(pubKeyArraySegwit);
+
+      const pubKeyTapSegwitHex = pubKeyTapSegwitBuffer.toString("hex");
+
+      //legecy
+      const pubKeyArrayLegacy = new Uint8Array(legacy.pubkey);
+
+      const pubKeyTapLegacyBuffer = Buffer.from(pubKeyArrayLegacy);
+
+      const pubKeyTapLegacyHex = pubKeyTapLegacyBuffer.toString("hex");
+
+      const payload = {
+        CurrencyId: 149,
+        NetworkType: 2,
+        Token: localStorage.getItem("refreshToken"),
+        WalletType: 1,
+        WalletName: "test",
+        RegisterMode: 2,
+        WalletAccounts: [
+          // {
+          //   Address: "",
+          //   PublicKey:
+          //     "12D1CD786C4BBEF262BB624D71C71FEC17B0AFD32481F9351F5080784B08283D",
+          //   AddressType: 1,
+          //   ContractAddress: "HBAR",
+          // },
+          {
+            Address: address,
+            PublicKey: publicKey,
+            AddressType: 2,
+            ContractAddress: "BNB",
+          },
+          // {
+          //   Address: "0xfe9A29fbD39658CAF5CC24925bc8e62459087b88",
+          //   PublicKey:
+          //     "0x03ddd9955adf25afd5b780836d5dbb545952a6fac74a858de5bd495a12c089168a",
+          //   AddressType: 2,
+          //   ContractAddress: "MATIC",
+          // },
+          {
+            Address: address,
+            PublicKey: publicKey,
+            AddressType: 2,
+            ContractAddress: "ETH",
+          },
+          {
+            Address: taproot?.address,
+            PublicKey: pubKeyTapRootHex,
+            AddressType: 5,
+            ContractAddress: "BTCT",
+          },
+          {
+            Address: legacy.address,
+            PublicKey: pubKeyTapLegacyHex,
+            AddressType: 3,
+            ContractAddress: "BTCL",
+          },
+          {
+            Address: segwit.address,
+            PublicKey: pubKeyTapSegwitHex,
+            AddressType: 4,
+            ContractAddress: "BTCS",
+          },
+        ],
+        WalletOption: 12,
+        CurrentWallet: null,
+      };
+      console.log("payload", payload);
+      axios.post("https://api.hero.io/Account/CreateWallet", payload, {
+        headers: {
+          Authorization: localStorage.getItem("jwtToken"),
+        },
+      });
       return {
         address,
         publicKey,
