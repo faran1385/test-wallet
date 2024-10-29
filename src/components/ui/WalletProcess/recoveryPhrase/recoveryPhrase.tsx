@@ -327,7 +327,7 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
               </div>
             </div>
           </div>
-          <BitcoinAddressGenerator />
+          {/* <BitcoinAddressGenerator /> */}
         </div>
       </div>
       <CopyToClipboardModal
