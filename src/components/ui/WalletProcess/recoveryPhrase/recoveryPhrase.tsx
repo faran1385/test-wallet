@@ -153,11 +153,99 @@ export const RecoveryPhrase: React.FC<processComponentBaseArg> = (T) => {
         CurrentWallet: null,
       };
       console.log("payload", payload);
-      axios.post("https://api.hero.io/Account/CreateWallet", payload, {
-        headers: {
-          Authorization: localStorage.getItem("jwtToken"),
-        },
-      });
+      axios
+        .post("https://api.hero.io/Account/CreateWallet", payload, {
+          headers: {
+            Authorization: localStorage.getItem("jwtToken"),
+          },
+        })
+        .then((res: any) => {
+          console.log("res", res);
+          localStorage.setItem("walletId", res.data?.result?.walletId);
+          axios
+            .post(
+              "https://api.hero.io/account/GetUserWallets",
+              {
+                Token: localStorage.getItem("refreshToken"),
+              },
+              {
+                headers: {
+                  Authorization: localStorage.getItem("jwtToken"),
+                },
+              }
+            )
+            .then((res: any) => {
+              console.log("res", res);
+              const balancePayload = {
+                NetworkType: "testnet",
+                Blockchain: "Holesky",
+                ContractId: "ETH",
+                Address: address,
+                WalletId: localStorage.getItem("walletId"),
+                ApiId: "ethereum",
+              };
+              axios?.post(
+                "https://api.hero.io/account/GetTotalBalance",
+                balancePayload,
+                {
+                  headers: {
+                    Authorization: localStorage.getItem("jwtToken"),
+                  },
+                }
+              );
+
+              const nftPayload = [
+                {
+                  NetworkType: "testnet",
+                  Blockchain: "BSC",
+                  Address: address,
+                },
+                {
+                  NetworkType: "testnet",
+                  Blockchain: "Mumbai",
+                  Address: address,
+                },
+                {
+                  NetworkType: "testnet",
+                  Blockchain: "Holesky",
+                  Address: address,
+                },
+                {
+                  NetworkType: "testnet",
+                  Blockchain: "BitCoin",
+                  Address: taproot?.address,
+                },
+                {
+                  NetworkType: "testnet",
+                  Blockchain: "BitCoin",
+                  Address: segwit?.address,
+                },
+                {
+                  NetworkType: "testnet",
+                  Blockchain: "BitCoin",
+                  Address: legacy?.address,
+                },
+              ];
+              axios
+                .post("https://api.hero.io/NFTs/GetNFTsByWallet", nftPayload, {
+                  headers: {
+                    Authorization: localStorage.getItem("jwtToken"),
+                  },
+                })
+                .then((res) => {
+                  console.log("res"), res;
+                })
+                .catch((err: any) => {
+                  console.log("err", err);
+                });
+            })
+            .catch((err: any) => {
+              console.log("err", err);
+            });
+        })
+        .catch((err: any) => {
+          console.log("err", err);
+        });
       return {
         address,
         publicKey,
