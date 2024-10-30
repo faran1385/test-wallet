@@ -1,6 +1,12 @@
 import {useState} from "react";
 import {useAtom} from "jotai";
 import {processAtom} from "../../../lib/Atom/walletProcess/walletProcess.ts";
+import "./style.css"
+import {Swiper, SwiperSlide} from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+
+
+import { Pagination } from 'swiper/modules';
 
 export const WelcomeState = () => {
 
@@ -13,21 +19,54 @@ export const WelcomeState = () => {
     return <div
         className="w-full h-full flex sm:pb-0 pb-8 flex-col sm:justify-center gap-y-12"
     >
-        <div className="flex flex-col sm:mt-8 my-auto items-center justify-center gap-3">
-            <img
-                src={"/imgs/Fly.png"}
-                width={248}
-                height={160}
-                alt="Hero fly"
-                className=""
-            />
-            <h2 className="text-2xl font-bold text-center">Welcome</h2>
+        <div className={"sm:mt-8 my-auto"}>
+            <Swiper
+                slidesPerView={1}
+                pagination={{
+                    clickable: true,
+                    el: '.custom-pagination',
+                    bulletClass: 'custom-bullet',
+                    bulletActiveClass: 'custom-bullet-active',
+                }}
+                modules={[Pagination]}
+                className={"w-full"}
+            >
+                <SwiperSlide>
+                    <div className={"flex w-full flex-col items-center justify-center gap-3"}>
+                        <img
+                            src={"/imgs/Fly.png"}
+                            width={248}
+                            height={160}
+                            alt="Hero fly"
+                            className=""
+                        />
+                        <h2 className="text-2xl font-bold text-center">Welcome</h2>
 
-            <p className="text-sm font-normal text-[#686D74] text-center">
-                In the next steps, you’ll be able to create <br/>
-                your own self-custody wallet or import an existing one.
-            </p>
+                        <p className="text-sm font-normal text-[#686D74] text-center">
+                            In the next steps, you’ll be able to create <br/>
+                            your own self-custody wallet or import an existing one.
+                        </p>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div className={"flex w-full flex-col items-center justify-center gap-3"}>
+                        <img
+                            src={"/imgs/Fly 1.png"}
+                            alt="Hero fly"
+                            className=""
+                        />
+                        <h2 className="text-2xl font-bold text-center">Welcome</h2>
+
+                        <p className="text-sm font-normal text-[#686D74] text-center">
+                            Explore our comprehensive financial<br/> services— transfer funds, send money<br/> globally, pay
+                            bills and buy crypto assets.
+                        </p>
+                    </div>
+                </SwiperSlide>
+            </Swiper>
+            <div className={"custom-pagination"}></div>
         </div>
+
         <div className="w-full flex flex-col items-center gap-7 sm:gap-12">
             <label
                 htmlFor="checkbox"
@@ -43,7 +82,6 @@ export const WelcomeState = () => {
                 <span className="text-sm text-[#686D74] font-normal select-none"
                 >I agree to the wallet<span className="font-bold text-black ml-1">Terms of Use</span></span>
             </label>
-
             <div
                 className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-5"
             >

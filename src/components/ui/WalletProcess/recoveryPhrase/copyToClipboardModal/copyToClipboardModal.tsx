@@ -44,14 +44,14 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                 backdropFilter: "blur(5px)"
             }}
-            className={`w-full  fixed ${T.clipboardModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}  z-10 inset-0 h-screen sm:px-0 px-4 grid place-content-center`}>
+            className={`w-full  fixed ${T.clipboardModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}  z-10 inset-0 h-screen  flex  sm:grid sm:place-content-center`}>
             <div
                 style={{
                     transition: "transform ease-in-out .3s",
                 }}
-                className={`w-full ${T.clipboardModal ? 'scale-100' : 'scale-0'} shadow-2xl h-full sm:min-w-[530px] md:h-fit container-board bg-white rounded-[12px]  p-6`}>
-                <div className={"w-full flex justify-end"}>
-                    <button onClick={() => T.setClipboardModal(false)}>
+                className={`w-full ${T.clipboardModal ? 'sm:scale-100 translate-y-0' : 'sm:scale-0 sm:translate-y-0 translate-y-full'} shadow-2xl sm:h-full sm:min-w-[530px]  mt-auto container-board bg-white rounded-t-[12px] sm:rounded-[12px]  p-6`}>
+                <div className={"w-full flex  justify-center sm:justify-end"}>
+                    <button className={"hidden sm:block"} onClick={() => T.setClipboardModal(false)}>
                         <svg className={"opacity-60 hover:opacity-100"}
                              style={{
                                  transition: "ease-in-out .3s opacity",
@@ -62,6 +62,14 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
                                 fill="#686D74" stroke="#686D74"/>
                         </svg>
                     </button>
+                    <span
+                        className={"w-6 block sm:hidden cursor-pointer h-[5px] rounded-2xl bg-wallet-dark"}
+                        onClick={() => {
+                            T.setClipboardModal(false)
+                        }}>
+
+                    </span>
+
                 </div>
                 <div className={"mt-6"}>
                     <h1 className={"text-center font-bold text-2xl"}>Do you want to copy<br

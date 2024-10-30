@@ -97,14 +97,16 @@ export const CreatePasswordState = () => {
                     <label htmlFor="*" className="text-[14px] font-medium px-2">
                         Enter new password
                     </label>
-                    <div className="rounded-[48px] border-[1px] flex relative">
+                    <div
+                        style={{transition: "border-color .3s ease-in-out"}}
+                        className={`rounded-[48px] border-[1px]  flex relative ${isValid ? "border-wallet-green" : ''}`}>
                         <input
                             value={password}
                             onFocus={handleFocus}
                             onChange={(e) => passwordInputChangeHandler(e.target.value)}
                             placeholder="Minimum of 10 characters"
                             type={hidePassword ? 'password' : 'text'}
-                            className="pl-4 bg-[#F8F9FB] w-full rounded-[48px] placeholder:text-[13px] placeholder:text-[#686D74] h-[50px] outline-1 outline-wallet-green focus:border-green-500"
+                            className="pl-4 bg-[#F8F9FB] w-full rounded-[48px] placeholder:text-[13px] placeholder:text-[#686D74] h-[50px] outline-1 outline-wallet-green"
                         />
                         <img
                             width={22}
@@ -130,13 +132,16 @@ export const CreatePasswordState = () => {
                     <label htmlFor="*" className="text-[14px] font-medium px-2">
                         Re-enter new password
                     </label>
-                    <div className="rounded-[48px] bg-[#F8F9FB] border-[1px] flex relative">
+                    <div
+                        style={{transition: "border-color .3s ease-in-out"}}
+                        className={`rounded-[48px] bg-[#F8F9FB] border-[1px] flex relative ${isValid ? 'border-wallet-green' : ''}`}>
                         <input
                             value={reEnteredPassword}
                             onFocus={handleFocus}
                             onChange={(e) => setReEnteredPassword(e.target.value)}
                             placeholder="Re-enter your set password"
                             type={hideReEnteredPassword ? 'password' : 'text'}
+                            style={{transition: "border-color .3s ease-in-out"}}
                             className="pl-4 bg-[#F8F9FB] w-full placeholder:text-[13px] placeholder:text-[#686D74] rounded-[48px] outline-1 outline-wallet-green  h-[50px]"
                         />
                         <img

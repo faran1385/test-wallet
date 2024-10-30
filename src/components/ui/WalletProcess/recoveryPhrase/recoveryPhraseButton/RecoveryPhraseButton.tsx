@@ -54,7 +54,6 @@ export const RecoveryPhraseButton: React.FC<RecoveryPhraseButtonProps> = (T) => 
             T.verifyClickHandler(T.text)
         }
     }
-    console.log(T.isValid)
     return <div
         style={{
             transition: "border-color .3s ease-in-out",
