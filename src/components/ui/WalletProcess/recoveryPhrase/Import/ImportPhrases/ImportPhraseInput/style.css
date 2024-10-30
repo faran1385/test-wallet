@@ -1,0 +1,3 @@
+.phrase-input-container input:focus + span {
+    color: #24D998;
+}

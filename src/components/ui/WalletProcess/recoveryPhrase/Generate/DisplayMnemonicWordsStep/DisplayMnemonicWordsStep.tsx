@@ -4,7 +4,7 @@ import {CopyToClipboardModal} from "../copyToClipboardModal/copyToClipboardModal
 import React, {useState} from "react";
 import {ethers} from "ethers";
 import "./style.css"
-import {recoveryProcessType} from "../../../../lib/Atom/walletProcess/walletProcess.ts";
+import {recoveryGenerateProcessType} from "../../../../../lib/Atom/walletProcess/walletProcess.ts";
 
 const copiedToClipBoardVariant: Variants = {
     hidden: {
@@ -32,7 +32,7 @@ interface DisplayMnemonicWordsStepProps {
         "15": string[],
         "24": string[]
     },
-    setRecoveryProcess: React.Dispatch<React.SetStateAction<recoveryProcessType>>,
+    setRecoveryProcess: React.Dispatch<React.SetStateAction<recoveryGenerateProcessType>>,
 }
 
 

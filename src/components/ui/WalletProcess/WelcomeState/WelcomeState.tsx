@@ -1,17 +1,21 @@
 import {useState} from "react";
 import {useAtom} from "jotai";
-import {processAtom} from "../../../lib/Atom/walletProcess/walletProcess.ts";
+import {processAtom, processTypeAtom} from "../../../lib/Atom/walletProcess/walletProcess.ts";
 import "./style.css"
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 
 
-import { Pagination } from 'swiper/modules';
+import {Pagination} from 'swiper/modules';
+import {ContentSlide} from "./ContentSlide/ContentSlide.tsx";
 
 export const WelcomeState = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_process, setProcess] = useAtom(processAtom)
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_processType, setProcessType] = useAtom(processTypeAtom)
 
     // agreement checkbox
     const [isChecked, setChecked] = useState(false)
@@ -32,36 +36,27 @@ export const WelcomeState = () => {
                 className={"w-full"}
             >
                 <SwiperSlide>
-                    <div className={"flex w-full flex-col items-center justify-center gap-3"}>
-                        <img
-                            src={"/imgs/Fly.png"}
-                            width={248}
-                            height={160}
-                            alt="Hero fly"
-                            className=""
-                        />
-                        <h2 className="text-2xl font-bold text-center">Welcome</h2>
-
+                    <ContentSlide
+                        title={'Welcome'}
+                        image={"/imgs/Fly.png"}
+                    >
                         <p className="text-sm font-normal text-[#686D74] text-center">
                             In the next steps, you’ll be able to create <br/>
                             your own self-custody wallet or import an existing one.
                         </p>
-                    </div>
+                    </ContentSlide>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className={"flex w-full flex-col items-center justify-center gap-3"}>
-                        <img
-                            src={"/imgs/Fly 1.png"}
-                            alt="Hero fly"
-                            className=""
-                        />
-                        <h2 className="text-2xl font-bold text-center">Welcome</h2>
-
+                    <ContentSlide
+                        title={'Welcome'}
+                        image={'/imgs/Fly 1.png'}
+                    >
                         <p className="text-sm font-normal text-[#686D74] text-center">
-                            Explore our comprehensive financial<br/> services— transfer funds, send money<br/> globally, pay
+                            Explore our comprehensive financial<br/> services— transfer funds, send money<br/> globally,
+                            pay
                             bills and buy crypto assets.
                         </p>
-                    </div>
+                    </ContentSlide>
                 </SwiperSlide>
             </Swiper>
             <div className={"custom-pagination"}></div>
@@ -86,13 +81,20 @@ export const WelcomeState = () => {
                 className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-5"
             >
                 <button
+                    onClick={() => {
+                        setProcessType("import")
+                        setProcess("password")
+                    }}
                     disabled={!isChecked}
                     className={`${isChecked ? 'opacity-100' : 'opacity-60 cursor-not-allowed'} text-center text-nowrap w-full  duration-300 bg-wallet-disable-background text-wallet-disable-text rounded-[40px] py-3 text-base font-medium peer-checked:hidden`}
                 >
                     Retrieve existing account
                 </button>
                 <button
-                    onClick={() => setProcess("password")}
+                    onClick={() => {
+                        setProcessType("generate")
+                        setProcess("password")
+                    }}
                     disabled={!isChecked}
                     className={`${isChecked ? 'opacity-100  hover:bg-[#21C58A] bg-[#24D998] text-[#151523]' : 'opacity-60 bg-wallet-disable-background text-wallet-disable-text  cursor-not-allowed'} text-center text-nowrap w-full duration-300  rounded-[40px] py-3 text-base font-medium peer-checked:hidden`}
                 >

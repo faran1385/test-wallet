@@ -1,36 +1,54 @@
 import {InfoModal} from "./infoModal/infoModal";
-import {DisplayMnemonicWordsStep} from "./DisplayMnemonicWordsStep/DisplayMnemonicWordsStep.tsx";
-import {SelectMnemonicLengthStep} from "./SelectMnemonicLengthStep/SelectMnemonicLengthStep.tsx";
+import {DisplayMnemonicWordsStep} from "./Generate/DisplayMnemonicWordsStep/DisplayMnemonicWordsStep.tsx";
+import {SelectMnemonicLengthStep} from "./Generate/SelectMnemonicLengthStep/SelectMnemonicLengthStep.tsx";
 import {useHandlePhrases} from "../../../lib/useHandlePhrases/useHandlePhrases.ts";
-import {recoveryProcessAtom} from "../../../lib/Atom/walletProcess/walletProcess.ts";
+import {
+    processTypeAtom,
+    recoveryGenerateProcessAtom,
+    recoveryImportProcessAtom
+} from "../../../lib/Atom/walletProcess/walletProcess.ts";
 import {useAtom} from "jotai";
-import {VerifyMnemonicStep} from "./VerifyMnemonicStep/VerifyMnemonicStep.tsx";
+import {VerifyMnemonicStep} from "./Generate/VerifyMnemonicStep/VerifyMnemonicStep.tsx";
+import {ImportPhrases} from "./Import/ImportPhrases/ImportPhrases.tsx";
 
 
 export const RecoveryPhrase = () => {
-    const [recoveryProcess, setRecoveryProcess] = useAtom(recoveryProcessAtom)
+    const [recoveryGenerateProcess, setRecoveryGenerateProcess] = useAtom(recoveryGenerateProcessAtom)
     const {setSelectedPhraseCount, selectedPhraseCount, phrases} = useHandlePhrases()
 
+    const [processType] = useAtom(processTypeAtom)
+
+    const [recoveryImportProcess, setRecoveryImportProcess] = useAtom(recoveryImportProcessAtom)
+
     return <>
-        {recoveryProcess === "selectMnemonicLength" ? (
+        {processType === "generate" ? (recoveryGenerateProcess === "selectMnemonicLength" ? (
             <SelectMnemonicLengthStep
-                setRecoveryProcess={setRecoveryProcess}
+                setRecoveryProcess={setRecoveryGenerateProcess}
                 selectedPhraseCount={selectedPhraseCount}
                 setSelectedPhraseCount={setSelectedPhraseCount}
             />
-        ) : recoveryProcess === "displayMnemonicWords" ? (
+        ) : recoveryGenerateProcess === "displayMnemonicWords" ? (
             <DisplayMnemonicWordsStep
-                setRecoveryProcess={setRecoveryProcess}
+                setRecoveryProcess={setRecoveryGenerateProcess}
                 phrases={phrases}
                 selectedPhraseCount={selectedPhraseCount}
             />
-        ) : recoveryProcess === "verifyMnemonic" ? (
+        ) : recoveryGenerateProcess === "verifyMnemonic" ? (
             <VerifyMnemonicStep
                 phrases={phrases}
                 selectedPhraseCount={selectedPhraseCount}
             />
-        ) : null}
-
+        ) : null) : (recoveryImportProcess === "selectMnemonicLength" ? (
+            <SelectMnemonicLengthStep
+                setRecoveryProcess={setRecoveryImportProcess}
+                selectedPhraseCount={selectedPhraseCount}
+                setSelectedPhraseCount={setSelectedPhraseCount}
+            />
+        ) : recoveryImportProcess === "importPhrases" ? (
+            <ImportPhrases
+                selectedPhraseCount={selectedPhraseCount}
+            />
+        ) : null)}
         <InfoModal/>
     </>
 }

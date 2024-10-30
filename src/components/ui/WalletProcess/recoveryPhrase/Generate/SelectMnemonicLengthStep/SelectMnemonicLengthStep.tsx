@@ -1,18 +1,25 @@
 import {RecoveryPhraseButton} from "../recoveryPhraseButton/RecoveryPhraseButton.tsx";
 import React from "react";
 import {useAtom} from "jotai";
-import {processAtom, recoveryProcessType} from "../../../../lib/Atom/walletProcess/walletProcess.ts";
+import {
+    processAtom, processTypeAtom,
+    recoveryGenerateProcessType,
+    recoveryImportProcessType
+} from "../../../../../lib/Atom/walletProcess/walletProcess.ts";
 
 interface SelectMnemonicLengthStepProps {
     setSelectedPhraseCount: React.Dispatch<React.SetStateAction<12 | 15 | 24>>,
-    setRecoveryProcess: React.Dispatch<React.SetStateAction<recoveryProcessType>>,
-    selectedPhraseCount: 12 | 15 | 24
+    setRecoveryProcess: React.Dispatch<React.SetStateAction<recoveryGenerateProcessType>> | React.Dispatch<React.SetStateAction<recoveryImportProcessType>>,
+    selectedPhraseCount: 12 | 15 | 24,
 }
 
 export const SelectMnemonicLengthStep: React.FC<SelectMnemonicLengthStepProps> = (T) => {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_process, setProcess] = useAtom(processAtom)
+
+    const [processType] = useAtom(processTypeAtom)
+
 
     return <>
         <div className="w-full h-full sm:pb-0 pb-8 flex flex-col items-center">
@@ -48,7 +55,7 @@ export const SelectMnemonicLengthStep: React.FC<SelectMnemonicLengthStepProps> =
                         Back
                     </button>
                     <button
-                        onClick={() => T.setRecoveryProcess("displayMnemonicWords")}
+                        onClick={() => T.setRecoveryProcess(processType === "import" ? "importPhrases" as any : "displayMnemonicWords" as any)}
                         className="text-nowrap text-center w-full duration-300 bg-[#24D998] hover:bg-[#21C58A] rounded-[40px] py-3 text-base font-normal peer-checked:hidden">
                         Continue
                     </button>

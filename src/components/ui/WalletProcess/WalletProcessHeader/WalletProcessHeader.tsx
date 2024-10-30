@@ -4,7 +4,7 @@ import {
     infoModalAtom,
     processAtom,
     processTypeArray,
-    recoveryProcessAtom, recoveryProcessTypeArray
+    recoveryGenerateProcessAtom, recoveryGenerateProcessTypeArray
 } from "../../../lib/Atom/walletProcess/walletProcess.ts";
 
 export const WalletProcessHeader: React.FC = () => {
@@ -12,7 +12,7 @@ export const WalletProcessHeader: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_infoModal, setInfoModal] = useAtom(infoModalAtom)
 
-    const [recoveryProcess, setRecoveryProcess] = useAtom(recoveryProcessAtom)
+    const [recoveryProcess, setRecoveryProcess] = useAtom(recoveryGenerateProcessAtom)
 
     const [process, setProcess] = useAtom(processAtom)
 
@@ -23,11 +23,11 @@ export const WalletProcessHeader: React.FC = () => {
     const backClickHandler = () => {
         if (process === "recoveryPhrase" && recoveryProcess !== "selectMnemonicLength") {
             // finding the user is in witch step of this state
-            const index = recoveryProcessTypeArray.findIndex(step => {
+            const index = recoveryGenerateProcessTypeArray.findIndex(step => {
                 return step === recoveryProcess
             })
 
-            setRecoveryProcess(recoveryProcessTypeArray[index - 1]);
+            setRecoveryProcess(recoveryGenerateProcessTypeArray[index - 1]);
         } else {
             setProcess(processTypeArray[processIndex - 1])
         }

@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import {recoveryProcessAtom} from "../../../../lib/Atom/walletProcess/walletProcess.ts";
+import {recoveryGenerateProcessAtom} from "../../../../../lib/Atom/walletProcess/walletProcess.ts";
 import {RecoveryPhraseButton} from "../recoveryPhraseButton/RecoveryPhraseButton.tsx";
 import {useAtom} from "jotai";
 import {
@@ -7,7 +7,7 @@ import {
     getThNumber,
     randomNumber,
     replaceAllItems, shuffleArray
-} from "../../../../lib/globalHelpers/globalHelpers.ts";
+} from "../../../../../lib/globalHelpers/globalHelpers.ts";
 import {ethers} from "ethers";
 import * as bitcoin from "bitcoinjs-lib";
 import * as bip39 from "bip39";
@@ -253,7 +253,7 @@ export const VerifyMnemonicStep: React.FC<VerifyMnemonicStepProps> = (T) => {
     const [randomIndexArray, setRandomIndexArray] = useState(getRandomNumberArray(3, T.selectedPhraseCount))
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_recoveryProcess, setRecoveryProcess] = useAtom(recoveryProcessAtom)
+    const [_recoveryProcess, setRecoveryProcess] = useAtom(recoveryGenerateProcessAtom)
 
     const [verifyIndex, setVerifyIndex] = useState(0)
 
