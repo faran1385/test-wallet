@@ -86,7 +86,7 @@ export const WelcomeState = () => {
                         setProcess("password")
                     }}
                     disabled={!isChecked}
-                    className={`${isChecked ? 'opacity-100' : 'opacity-60 cursor-not-allowed'} text-center text-nowrap w-full  duration-300 bg-wallet-disable-background text-wallet-disable-text rounded-[40px] py-3 text-base font-medium peer-checked:hidden`}
+                    className={`${isChecked ? 'opacity-100 bg-wallet-dark text-white' : 'opacity-60 cursor-not-allowed bg-wallet-disable-background text-wallet-disable-text'} text-center text-nowrap w-full  duration-300  rounded-[40px] py-3 text-base font-medium peer-checked:hidden`}
                 >
                     Retrieve existing account
                 </button>
