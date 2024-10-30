@@ -60,6 +60,7 @@ export const ChooseName = () => {
                         Back
                     </button>
                     <button
+                        onClick={() => setProcess("waiting")}
                         disabled={!(selectedCurrency !== null && inputIsValid)}
                         className={`text-nowrap ${selectedCurrency !== null && inputIsValid ? 'opacity-100  hover:bg-[#21C58A] bg-[#24D998] text-[#151523]' : 'opacity-60 bg-wallet-disable-background text-wallet-disable-text  cursor-not-allowed'} text-center w-full duration-300 bg-[#24D998] rounded-[40px] py-3 text-base font-normal peer-checked:hidden`}>
                         Continue

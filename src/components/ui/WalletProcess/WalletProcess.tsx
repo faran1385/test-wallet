@@ -5,6 +5,7 @@ import {WalletProcessHeader} from "./WalletProcessHeader/WalletProcessHeader.tsx
 import {processAtom} from "../../lib/Atom/walletProcess/walletProcess.ts";
 import {useAtom} from "jotai";
 import {ChooseName} from "./ChooseName/ChooseName.tsx";
+import {Waiting} from "./Waiting/Waiting.tsx";
 
 
 export const WalletProcess = () => {
@@ -20,6 +21,8 @@ export const WalletProcess = () => {
                 <RecoveryPhrase/>
             ) : process === "chooseName" ? (
                 <ChooseName/>
+            ) : process === "waiting" ? (
+                <Waiting/>
             ) : null}
         </div>
     </div>

@@ -32,6 +32,9 @@ export const WalletProcessHeader: React.FC = () => {
             setProcess(processTypeArray[processIndex - 1])
         }
     }
+
+    if (process === "waiting") return null
+
     return <header className="w-full flex justify-between items-center">
         <button className={`${processIndex !== 0 ? 'visible' : 'invisible'}`}>
             <img

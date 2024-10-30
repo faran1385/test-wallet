@@ -1,6 +1,6 @@
 import {atom} from "jotai";
 
-export type processType = "welcome" | "password" | "recoveryPhrase" | "chooseName";
+export type processType = "welcome" | "password" | "recoveryPhrase" | "chooseName" | "waiting";
 // steps of recoveryPhrase while generating
 export type recoveryGenerateProcessType = 'selectMnemonicLength' | "displayMnemonicWords" | "verifyMnemonic"
 // steps of recoveryPhrase while importing
@@ -8,8 +8,8 @@ export type recoveryImportProcessType = "selectMnemonicLength" | "importPhrases"
 // types of recoveryPhrase
 export type walletProcessType = "generate" | "import"
 
-export const processTypeArray: processType[] = ["welcome", "password", "recoveryPhrase", "chooseName"]
-export const processAtom = atom<processType>("chooseName")
+export const processTypeArray: processType[] = ["welcome", "password", "recoveryPhrase", "chooseName", "waiting"]
+export const processAtom = atom<processType>("welcome")
 
 // opening state of info modal
 export const infoModalAtom = atom(false)
@@ -19,7 +19,7 @@ export const processTypeAtom = atom<walletProcessType>("generate")
 
 // generate
 export const recoveryGenerateProcessTypeArray: recoveryGenerateProcessType[] = ['selectMnemonicLength', "displayMnemonicWords", "verifyMnemonic"]
-export const recoveryGenerateProcessAtom = atom<recoveryGenerateProcessType>("verifyMnemonic")
+export const recoveryGenerateProcessAtom = atom<recoveryGenerateProcessType>("selectMnemonicLength")
 
 // import
 export const recoveryImportProcessTypeArray: recoveryImportProcessType[] = ["selectMnemonicLength", "importPhrases"]
