@@ -1,0 +1,14 @@
+.phrases-container::-webkit-scrollbar {
+    width: 4px;
+    height: 12px;
+}
+
+.phrases-container::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+}
+
+.phrases-container::-webkit-scrollbar-track {
+    background: lightgrey;
+    border-radius: 10px;
+}

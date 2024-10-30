@@ -9,7 +9,11 @@ export default {
             colors: {
                 wallet: {
                     dark: '#242431',
-                    green: '#24D998'
+                    green: '#24D998',
+                    disable: {
+                        background: '#CAD2DC',
+                        text:'#4F5459'
+                    }
                 }
             },
         },

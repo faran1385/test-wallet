@@ -1,25 +1,24 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {createPortal} from "react-dom";
+import {useAtom} from "jotai";
+import {infoModalAtom} from "../../../../lib/Atom/walletProcess/walletProcess.ts";
 
 
-interface RecoveryPhraseModalProps {
-    setInfoModal: React.Dispatch<React.SetStateAction<boolean>>;
-    infoModal: boolean;
-}
+export const InfoModal = () => {
 
-export const InfoModal: React.FC<RecoveryPhraseModalProps> = (T) => {
     const [body, setBody] = useState<null | HTMLElement>(null);
+    const [infoModal, setInfoModal] = useAtom(infoModalAtom)
 
     useEffect(() => setBody(document.body), []);
 
     // adding overflow hidden
     useEffect(() => {
-        if (T.infoModal) {
+        if (infoModal) {
             document.body.classList.add("overflow-y-hidden")
         } else {
             document.body.classList.remove("overflow-y-hidden")
         }
-    }, [T.infoModal]);
+    }, [infoModal]);
 
     return <>
         {body && createPortal(<div
@@ -28,14 +27,14 @@ export const InfoModal: React.FC<RecoveryPhraseModalProps> = (T) => {
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                 backdropFilter: "blur(5px)"
             }}
-            className={`w-full  fixed ${T.infoModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}  z-10 inset-0 h-screen sm:px-0 px-4 grid place-content-center`}>
+            className={`w-full  fixed ${infoModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}  z-10 inset-0 h-screen sm:px-0 px-4 grid place-content-center`}>
             <div
                 style={{
                     transition: "transform ease-in-out .3s",
                 }}
-                className={`w-full ${T.infoModal ? 'scale-100' : 'scale-0'} shadow-2xl h-full sm:w-[530px] md:h-fit container-board bg-white rounded-[12px]  p-6`}>
+                className={`w-full ${infoModal ? 'scale-100' : 'scale-0'} shadow-2xl h-full sm:w-[530px] md:h-fit container-board bg-white rounded-[12px]  p-6`}>
                 <div className={"w-full flex justify-end"}>
-                    <button onClick={() => T.setInfoModal(false)}>
+                    <button onClick={() => setInfoModal(false)}>
                         <svg className={"opacity-60 hover:opacity-100"}
                              style={{
                                  transition: "ease-in-out .3s opacity",
