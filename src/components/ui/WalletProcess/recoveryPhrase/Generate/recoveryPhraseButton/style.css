@@ -1,0 +1,11 @@
+.verify-done {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 40s linear forwards
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

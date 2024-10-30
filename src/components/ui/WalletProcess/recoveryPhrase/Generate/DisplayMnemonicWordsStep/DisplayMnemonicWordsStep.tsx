@@ -90,7 +90,7 @@ export const DisplayMnemonicWordsStep: React.FC<DisplayMnemonicWordsStepProps> =
                 </div>
                 <div className="sm:block grid mt-8 gap-4">
                     <div
-                        className="grid h-[189px] max-h-[189px] px-4 phrases-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
+                        className="grid px-4 phrases-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
                         {phrases[`${selectedPhraseCount}`].length > 0 ? phrases[`${selectedPhraseCount}`].map((phrase, i) => {
                             return <RecoveryPhraseButton text={phrase} key={phrase + i} number={i + 1}/>
                         }) : (Array(12).fill("loading").map((phrase, i) => {

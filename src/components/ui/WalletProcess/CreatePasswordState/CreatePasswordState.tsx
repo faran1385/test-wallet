@@ -45,6 +45,8 @@ export const CreatePasswordState = () => {
         submitRequirements.includesTenChars &&
         submitRequirements.includesNumbers &&
         submitRequirements.includesSpecialChars
+
+
     const submitHandler = async () => {
         if (isValid && !loading) {
             setLoading(true)
@@ -121,11 +123,11 @@ export const CreatePasswordState = () => {
 
                     <p className="text-[13px] leading-5 text-[#686D74] px-[6px]">
                         *Strong passwords are <span
-                        className={`${submitRequirements.includesTenChars ? 'text-wallet-green' : ''}`}>10 characters or more</span>,
+                        className={`${submitRequirements.includesTenChars ? 'text-wallet-green font-bold' : ''}`}>10 characters or more</span>,
                         and&nbsp;
-                        <span className={`${submitRequirements.includesSpecialChars ? 'text-wallet-green' : ''}`}>include special characters</span>
+                        <span className={`${submitRequirements.includesSpecialChars ? 'text-wallet-green font-bold' : ''}`}>include special characters</span>
                         &nbsp;and&nbsp;<span
-                        className={`${submitRequirements.includesNumbers ? 'text-wallet-green' : ''}`}> numbers.</span>
+                        className={`${submitRequirements.includesNumbers ? 'text-wallet-green font-bold' : ''}`}> numbers.</span>
                     </p>
                 </div>
                 <div className="mt-6 flex flex-col gap-2">

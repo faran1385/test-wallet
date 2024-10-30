@@ -70,7 +70,7 @@ export const ImportPhrases: React.FC<ImportPhrasesProps> = (T) => {
                 </div>
                 <div className="sm:block grid mt-8 gap-4">
                     <div
-                        className="grid h-[189px] max-h-[189px] px-4 phrases-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
+                        className="grid px-4 phrases-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
                         {fakeArray.map((_value, index) => {
                             return <ImportPhraseInput
                                 key={index}
