@@ -55,6 +55,9 @@ export const CreatePasswordState = () => {
                 if (res.status === 200) {
                     setLoading(false)
                     localStorage.setItem("refreshToken", res.data.result.refreshToken)
+
+                    localStorage.setItem("userId", res.data.result?.id)
+                    localStorage.setItem("jwtToken", res.data.result?.jwtToken)
                     setProcess("recoveryPhrase")
                 }
             } catch (e: any) {
