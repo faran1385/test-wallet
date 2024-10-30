@@ -24,10 +24,23 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
         T.phrases.forEach((phrase, i) => {
             text += (i + 1) + '-' + phrase + ' '
         })
-
-        navigator.clipboard.writeText(text)
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text)
+        } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                const successful = document.execCommand('copy');
+                const msg = successful ? 'Text copied to clipboard (fallback)' : 'Failed to copy text (fallback)';
+                console.log(msg);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+            document.body.removeChild(textarea);
+        }
     }
-
     // adding overflow hidden to body
     useEffect(() => {
         if (T.clipboardModal) {
@@ -56,7 +69,8 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
                              style={{
                                  transition: "ease-in-out .3s opacity",
                              }}
-                             width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             width="14" height="14" viewBox="0 0 14 14" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M13.2929 1.41L8.05645 6.64645L7.70289 7L8.05645 7.35355L13.2929 12.59L12.59 13.2929L7.35355 8.05645L7 7.70289L6.64645 8.05645L1.41 13.2929L0.707107 12.59L5.94355 7.35355L6.29711 7L5.94355 6.64645L0.707107 1.41L1.41 0.707107L6.64645 5.94355L7 6.29711L7.35355 5.94355L12.59 0.707107L13.2929 1.41Z"
                                 fill="#686D74" stroke="#686D74"/>
@@ -75,7 +89,8 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
                     <h1 className={"text-center font-bold text-2xl"}>Do you want to copy<br
                         className={"hidden sm:block"}/> your recovery phrase? </h1>
                     <p className={"text-[14px] text-center mt-[20px] text-[#686D74]"}>
-                        It is very important that you store it safely. If you<br className={"hidden sm:block"}/> lost it
+                        It is very important that you store it safely. If you<br
+                        className={"hidden sm:block"}/> lost it
                         you
                         will no longer be able to access
                         your<br className={"hidden sm:block"}/> wallet and your funds will be compromised.
