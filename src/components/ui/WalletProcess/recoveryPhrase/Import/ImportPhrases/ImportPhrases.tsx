@@ -1,5 +1,6 @@
 import {useAtom} from "jotai";
 import {
+    processAtom,
     recoveryImportProcessAtom
 } from "../../../../../lib/Atom/walletProcess/walletProcess.ts";
 import React, {useRef, useState} from "react";
@@ -11,6 +12,8 @@ interface ImportPhrasesProps {
 }
 
 export const ImportPhrases: React.FC<ImportPhrasesProps> = (T) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_process, setProcess] = useAtom(processAtom)
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_importProcess, setImportProcess] = useAtom(recoveryImportProcessAtom)
@@ -93,6 +96,7 @@ export const ImportPhrases: React.FC<ImportPhrasesProps> = (T) => {
                     </button>
                     <button
                         disabled={!isValid}
+                        onClick={()=>setProcess("chooseName")}
                         className={`text-nowrap text-center w-full duration-300 ${isValid ? 'bg-[#24D998] hover:bg-[#21C58A]' : 'bg-wallet-disable-background text-wallet-disable-text opacity-60 cursor-not-allowed'}  rounded-[40px] py-3 text-base font-normal peer-checked:hidden`}>
                         Continue
                     </button>

@@ -1,3 +1,5 @@
+import React from "react";
+
 export function getUnitDigit(number: number) {
     return number % 10;
 }
@@ -32,6 +34,11 @@ export const getRandomNumberArray = (length: number, range: number) => {
 }
 
 export function shuffleArray(array: any[]): any[] {
+
+    if (array.length === 0) {
+        return [];
+    }
+
     const clonedArray = [...array];
 
     for (let i = clonedArray.length - 1; i > 0; i--) {
@@ -54,4 +61,21 @@ export const randomNumber = (array: number[], range: number) => {
     }
 
     return selectedRandomNumber
+}
+
+
+export const handleClickOutSide = (includeClasses: string[], setter: React.Dispatch<React.SetStateAction<boolean>>) => {
+    window.addEventListener("click", (e) => {
+        if (e.srcElement && "classList" in e.srcElement) {
+            const doesInclude = includeClasses.map((classItem) => {
+                return (e.srcElement as any).classList.contains(classItem)
+            }).some((item) => item)
+
+            if (!doesInclude) {
+                setter(false)
+            }
+        } else {
+            setter(false)
+        }
+    })
 }

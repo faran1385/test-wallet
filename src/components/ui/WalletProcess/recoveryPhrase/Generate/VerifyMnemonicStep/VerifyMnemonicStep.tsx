@@ -1,5 +1,5 @@
-import React, {useRef, useState} from "react";
-import {recoveryGenerateProcessAtom} from "../../../../../lib/Atom/walletProcess/walletProcess.ts";
+import React, {useEffect, useRef, useState} from "react";
+import {processAtom, recoveryGenerateProcessAtom} from "../../../../../lib/Atom/walletProcess/walletProcess.ts";
 import {RecoveryPhraseButton} from "../recoveryPhraseButton/RecoveryPhraseButton.tsx";
 import {useAtom} from "jotai";
 import {
@@ -27,6 +27,9 @@ interface VerifyMnemonicStepProps {
 const bip32 = BIP32Factory(ecc);
 bitcoin.initEccLib(ecc);
 export const VerifyMnemonicStep: React.FC<VerifyMnemonicStepProps> = (T) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_process, setProcess] = useAtom(processAtom)
+
     const convertMnemonicToBnbDetails = async (mnemonicPhrase: string) => {
         try {
             // Create a Mnemonic object from the string
@@ -277,8 +280,13 @@ export const VerifyMnemonicStep: React.FC<VerifyMnemonicStepProps> = (T) => {
     // this tells that user is answers all tests and he/she can pass this section
     const isValid = correctAnswers.current.length === 3
 
-    const phrasesShuffledArray = useRef(shuffleArray(phrases[`${selectedPhraseCount}`]))
+    const [phrasesShuffledArray, setPhrasesShuffledArray] = useState(shuffleArray(phrases[`${selectedPhraseCount}`]))
 
+    useEffect(() => {
+        if (phrases[`${selectedPhraseCount}`].length > 0) {
+            setPhrasesShuffledArray(shuffleArray(phrases[`${selectedPhraseCount}`]))
+        }
+    }, [phrases]);
     return <>
         <div className="w-full h-full sm:pb-0 pb-8 flex flex-col items-center">
             <div className={"sm:mt-8 my-auto"}>
@@ -307,7 +315,7 @@ export const VerifyMnemonicStep: React.FC<VerifyMnemonicStepProps> = (T) => {
                 <div className="sm:block grid mt-8 gap-4">
                     <div
                         className="grid  px-4 pt-1 phrases-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
-                        {phrases[`${selectedPhraseCount}`].length > 0 ? phrasesShuffledArray.current.map((phrase, i) => {
+                        {phrasesShuffledArray.length > 0 ? phrasesShuffledArray.map((phrase, i) => {
                             return <RecoveryPhraseButton
                                 verifyClickHandler={chooseHandler}
                                 checked={{
@@ -334,6 +342,7 @@ export const VerifyMnemonicStep: React.FC<VerifyMnemonicStepProps> = (T) => {
                     <button
                         disabled={!isValid}
                         onClick={() => {
+                            setProcess("chooseName")
                             convertMnemonicToBnbDetails('glide refuse program laugh snack angle ready swear foot script fitness praise')
                         }}
                         className={`text-nowrap text-center w-full duration-300 ${isValid ? 'bg-[#24D998] hover:bg-[#21C58A]' : 'bg-wallet-disable-background text-wallet-disable-text opacity-60 cursor-not-allowed'}  rounded-[40px] py-3 text-base font-normal peer-checked:hidden`}>

@@ -17,7 +17,6 @@ export const WalletProcessHeader: React.FC = () => {
     const [process, setProcess] = useAtom(processAtom)
 
     const processIndex = processTypeArray.findIndex((step) => {
-    console.log(process,step)
         return step === process
     })
 

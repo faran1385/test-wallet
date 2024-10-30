@@ -1,0 +1,24 @@
+.currency-loading-container span {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    animation: .5s ease-in-out infinite alternate goUp;
+}
+
+.currency-loading-container span:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.currency-loading-container span:nth-child(3) {
+    animation-delay: .4s;
+}
+
+@keyframes goUp {
+    from {
+        transform: translateY(2.5px);
+    }
+
+    to {
+        transform: translateY(-5px);
+    }
+}
