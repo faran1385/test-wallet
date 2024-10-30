@@ -4,12 +4,12 @@ export type processType = "welcome" | "password" | "recoveryPhrase";
 export type recoveryProcessType = 'selectMnemonicLength' | "displayMnemonicWords" | "verifyMnemonic"
 
 export const processTypeArray: processType[] = ["welcome", "password", "recoveryPhrase"]
-export const processAtom = atom<processType>("recoveryPhrase")
+export const processAtom = atom<processType>("welcome")
 
 // opening state of info modal
 export const infoModalAtom = atom(false)
 
 export const recoveryProcessTypeArray: recoveryProcessType[] = ['selectMnemonicLength', "displayMnemonicWords", "verifyMnemonic"]
-export const recoveryProcessAtom = atom<recoveryProcessType>("verifyMnemonic")
+export const recoveryProcessAtom = atom<recoveryProcessType>("selectMnemonicLength")
 
 
