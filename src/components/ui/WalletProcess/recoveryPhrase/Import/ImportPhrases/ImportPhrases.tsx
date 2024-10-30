@@ -28,6 +28,31 @@ export const ImportPhrases: React.FC<ImportPhrasesProps> = (T) => {
         setIsValid(bip39.validateMnemonic(mnemonic))
     }
 
+    const pasteHandler = (e: React.ClipboardEvent<HTMLInputElement>) => {
+        const pastedText = e.clipboardData.getData('text');
+        const rawPastedTextArray = pastedText.split(' ').filter((item) => item.trim())
+        if (rawPastedTextArray.length === T.selectedPhraseCount) {
+            e.preventDefault()
+            const pastedArray = rawPastedTextArray.map((text) => {
+                if (Number.isInteger(+(text.trim().slice(0, 1))) && (text.slice(1, 2) === "-")) {
+                    return text.slice(2)
+                } else if (Number.isInteger(+(text.trim().slice(0, 2))) && text.slice(2, 3) === "-") {
+                    return text.slice(3)
+                }
+                return text
+            })
+
+            const inputs = document.querySelectorAll('.import-phrase-input') as NodeListOf<HTMLInputElement>
+            inputs.forEach((input, i) => {
+                input.value = pastedArray[i]
+                valueArray.current[i] = pastedArray[i]
+            })
+
+            const mnemonic = valueArray.current.join(' ')
+            setIsValid(bip39.validateMnemonic(mnemonic))
+        }
+    }
+
     return <>
         <div className="w-full h-full sm:pb-0 pb-8 flex flex-col items-center">
             <div className={"sm:mt-8 my-auto"}>
@@ -51,6 +76,7 @@ export const ImportPhrases: React.FC<ImportPhrasesProps> = (T) => {
                                 key={index}
                                 isValid={isValid}
                                 index={index}
+                                pasteHandler={pasteHandler}
                                 changeHandler={inputOnChangeHandler}
                                 number={index + 1}
                             />
