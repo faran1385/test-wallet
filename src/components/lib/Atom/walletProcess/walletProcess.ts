@@ -20,7 +20,7 @@ export const processTypeAtom = atom<walletProcessType>("generate")
 
 // generate
 export const recoveryGenerateProcessTypeArray: recoveryGenerateProcessType[] = ['selectMnemonicLength', "displayMnemonicWords", "verifyMnemonic"]
-export const recoveryGenerateProcessAtom = atom<recoveryGenerateProcessType>("displayMnemonicWords")
+export const recoveryGenerateProcessAtom = atom<recoveryGenerateProcessType>("selectMnemonicLength")
 
 // import
 export const recoveryImportProcessTypeArray: recoveryImportProcessType[] = ["selectMnemonicLength", "importPhrases"]
