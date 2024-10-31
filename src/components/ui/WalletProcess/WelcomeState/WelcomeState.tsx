@@ -23,7 +23,7 @@ export const WelcomeState = () => {
     return <div
         className="w-full h-full flex sm:pb-0 pb-8 flex-col sm:justify-center gap-y-12"
     >
-        <div className={"sm:mt-8 my-auto"}>
+        <div className={"my-auto"}>
             <Swiper
                 slidesPerView={1}
                 pagination={{

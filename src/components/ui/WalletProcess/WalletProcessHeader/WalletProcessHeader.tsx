@@ -3,8 +3,13 @@ import {useAtom} from "jotai";
 import {
     infoModalAtom,
     processAtom,
+    processType,
     processTypeArray,
-    recoveryGenerateProcessAtom, recoveryGenerateProcessTypeArray
+    processTypeAtom,
+    recoveryGenerateProcessAtom, recoveryGenerateProcessType,
+    recoveryGenerateProcessTypeArray, recoveryImportProcessAtom,
+    recoveryImportProcessType,
+    recoveryImportProcessTypeArray
 } from "../../../lib/Atom/walletProcess/walletProcess.ts";
 
 export const WalletProcessHeader: React.FC = () => {
@@ -12,31 +17,49 @@ export const WalletProcessHeader: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_infoModal, setInfoModal] = useAtom(infoModalAtom)
 
-    const [recoveryProcess, setRecoveryProcess] = useAtom(recoveryGenerateProcessAtom)
+    const [recoveryGenerateProcess, setRecoveryGenerateProcess] = useAtom(recoveryGenerateProcessAtom)
+
+    const [recoveryImportProcess, setRecoveryImportProcess] = useAtom(recoveryImportProcessAtom)
 
     const [process, setProcess] = useAtom(processAtom)
+
+    const [processType] = useAtom(processTypeAtom)
 
     const processIndex = processTypeArray.findIndex((step) => {
         return step === process
     })
 
     const backClickHandler = () => {
-        if (process === "recoveryPhrase" && recoveryProcess !== "selectMnemonicLength") {
+        if (process === "recoveryPhrase" && processType === "generate" && recoveryGenerateProcess !== "selectMnemonicLength") {
             // finding the user is in witch step of this state
             const index = recoveryGenerateProcessTypeArray.findIndex(step => {
-                return step === recoveryProcess
+                return step === recoveryGenerateProcess
             })
 
-            setRecoveryProcess(recoveryGenerateProcessTypeArray[index - 1]);
+            setRecoveryGenerateProcess(recoveryGenerateProcessTypeArray[index - 1]);
+        } else if (process === "recoveryPhrase" && processType === "import" && recoveryImportProcess !== "selectMnemonicLength") {
+            // finding the user is in witch step of this state
+            const index = recoveryImportProcessTypeArray.findIndex(step => {
+                return step === recoveryImportProcess
+            })
+
+            setRecoveryImportProcess(recoveryImportProcessTypeArray[index - 1]);
         } else {
             setProcess(processTypeArray[processIndex - 1])
         }
     }
 
-    if (process === "waiting") return null
+    if (process === "waiting" || process === "welcome") return null
 
+    let steps: (processType | recoveryGenerateProcessType | recoveryImportProcessType)[] = [...processTypeArray]
+    const recoveryIndex = steps.indexOf("recoveryPhrase")
+    const typeArray = processType === "generate" ? recoveryGenerateProcessTypeArray : recoveryImportProcessTypeArray
+    steps = [...steps.slice(1, recoveryIndex), ...typeArray, ...steps.slice(recoveryIndex + 1, steps.length - 1)]
+    const currentStepIndex = processIndex + typeArray.indexOf(processType === "generate" ? (recoveryGenerateProcess) : (recoveryImportProcess as any)) - 1
+    console.log(currentStepIndex)
+    console.log(currentStepIndex)
     return <header className="w-full flex justify-between items-center">
-        <button className={`${processIndex !== 0 ? 'visible' : 'invisible'}`}>
+        <button className={`visible`}>
             <img
                 onClick={backClickHandler}
                 width={9}
@@ -47,9 +70,10 @@ export const WalletProcessHeader: React.FC = () => {
             />
         </button>
         <div className="flex items-center mx-auto justify-center gap-4 *:h-[9px] *:w-[9px]">
-            {processTypeArray.map((step, i) => {
+            {steps.map((step, i) => {
+
                 return <div key={step + i}
-                            className={`circle cursor-pointer rounded-full ${i <= processIndex ? 'bg-[#24D998]' : 'bg-[#BDC7D3]'}`}></div>
+                            className={`circle cursor-pointer rounded-full ${i <= currentStepIndex ? 'bg-[#24D998]' : 'bg-[#BDC7D3]'}`}></div>
             })}
         </div>
 
