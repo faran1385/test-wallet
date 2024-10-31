@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -14,6 +14,7 @@
     "@binance-chain/javascript-sdk": "^4.2.2",
     "@cosmjs/encoding": "^0.32.4",
     "@cosmjs/proto-signing": "^0.32.4",
+    "@esbuild/darwin-arm64": "^0.24.0",
     "@types/bip39": "^3.0.4",
     "axios": "^1.7.7",
     "bip32": "^5.0.0-rc.0",
