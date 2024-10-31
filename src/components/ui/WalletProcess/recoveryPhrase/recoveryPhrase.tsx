@@ -1,7 +1,7 @@
 import {InfoModal} from "./infoModal/infoModal";
 import {DisplayMnemonicWordsStep} from "./Generate/DisplayMnemonicWordsStep/DisplayMnemonicWordsStep.tsx";
 import {SelectMnemonicLengthStep} from "./Generate/SelectMnemonicLengthStep/SelectMnemonicLengthStep.tsx";
-import {useHandlePhrases} from "../../../lib/useHandlePhrases/useHandlePhrases.ts";
+
 import {
     processTypeAtom,
     recoveryGenerateProcessAtom,
@@ -10,12 +10,22 @@ import {
 import {useAtom} from "jotai";
 import {VerifyMnemonicStep} from "./Generate/VerifyMnemonicStep/VerifyMnemonicStep.tsx";
 import {ImportPhrases} from "./Import/ImportPhrases/ImportPhrases.tsx";
+import React from "react";
 
+interface RecoveryPhraseProps {
+    setSelectedPhraseCount: React.Dispatch<React.SetStateAction<12 | 15 | 24>>,
+    selectedPhraseCount: 12 | 15 | 24,
+    phrases: {
+        "12": string[],
+        "15": string[],
+        "24": string[]
+    }
 
-export const RecoveryPhrase = () => {
+}
+
+export const RecoveryPhrase: React.FC<RecoveryPhraseProps> = (T) => {
+    const {selectedPhraseCount, setSelectedPhraseCount, phrases} = T
     const [recoveryGenerateProcess, setRecoveryGenerateProcess] = useAtom(recoveryGenerateProcessAtom)
-    const {setSelectedPhraseCount, selectedPhraseCount, phrases} = useHandlePhrases()
-
     const [processType] = useAtom(processTypeAtom)
 
     const [recoveryImportProcess, setRecoveryImportProcess] = useAtom(recoveryImportProcessAtom)

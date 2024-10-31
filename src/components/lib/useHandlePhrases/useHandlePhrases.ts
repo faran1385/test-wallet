@@ -2,8 +2,6 @@ import {useEffect, useState} from "react";
 import * as bip39 from "bip39";
 
 export const useHandlePhrases = () => {
-
-
     // length of phrases state
     const [selectedPhraseCount, setSelectedPhraseCount] = useState<12 | 15 | 24>(12)
 
