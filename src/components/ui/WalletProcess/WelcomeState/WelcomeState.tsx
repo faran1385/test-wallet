@@ -21,7 +21,7 @@ export const WelcomeState = () => {
     const [isChecked, setChecked] = useState(false)
 
     return <div
-        className="w-full h-full flex sm:pb-0 pb-8 flex-col sm:justify-center gap-y-12"
+        className="w-full h-full flex flex-col sm:justify-center gap-y-12"
     >
         <div className={"my-auto"}>
             <Swiper

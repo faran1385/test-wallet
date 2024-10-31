@@ -56,8 +56,7 @@ export const WalletProcessHeader: React.FC = () => {
     const typeArray = processType === "generate" ? recoveryGenerateProcessTypeArray : recoveryImportProcessTypeArray
     steps = [...steps.slice(1, recoveryIndex), ...typeArray, ...steps.slice(recoveryIndex + 1, steps.length - 1)]
     const currentStepIndex = processIndex + typeArray.indexOf(processType === "generate" ? (recoveryGenerateProcess) : (recoveryImportProcess as any)) - 1
-    console.log(currentStepIndex)
-    console.log(currentStepIndex)
+
     return <header className="w-full flex justify-between items-center">
         <button className={`visible`}>
             <img

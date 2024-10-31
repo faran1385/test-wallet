@@ -3,7 +3,7 @@ import * as bip39 from "bip39";
 
 export const useHandlePhrases = () => {
     // length of phrases state
-    const [selectedPhraseCount, setSelectedPhraseCount] = useState<12 | 15 | 24>(12)
+    const [selectedPhraseCount, setSelectedPhraseCount] = useState<12 | 15 | 24>(24)
 
     // phrases array
     const [phrases, setPhrases] = useState({

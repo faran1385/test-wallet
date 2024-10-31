@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {createPortal} from "react-dom";
+import {handler} from "../../../../../lib/globalHelpers/globalHelpers.ts";
 
 interface CopyToClipboardModalProps {
     clipboardModal: boolean,
@@ -10,6 +11,8 @@ interface CopyToClipboardModalProps {
 
 export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => {
     const [body, setBody] = useState<null | HTMLElement>(null);
+
+    const modalContainerRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => setBody(document.body), []);
 
@@ -48,7 +51,21 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
         } else {
             document.body.classList.remove("overflow-y-hidden")
         }
-    }, [T.clipboardModal]);
+        // css in js
+        handler(modalContainerRef, T.clipboardModal)
+    }, [T.clipboardModal, body]);
+
+    // css in js
+    useEffect(() => {
+        const resize = () => handler(modalContainerRef, T.clipboardModal)
+        window.addEventListener("resize", resize);
+        handler(modalContainerRef, T.clipboardModal)
+
+        return () => {
+            window.removeEventListener("resize", resize);
+        }
+    }, [body]);
+
 
     return <>
         {body && createPortal(<div
@@ -59,10 +76,11 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
             }}
             className={`w-full  fixed ${T.clipboardModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}  z-10 inset-0 h-screen  flex  sm:grid sm:place-content-center`}>
             <div
+                ref={modalContainerRef}
                 style={{
                     transition: "transform ease-in-out .3s",
                 }}
-                className={`w-full ${T.clipboardModal ? 'sm:scale-100 translate-y-0' : 'sm:scale-0 sm:translate-y-0 translate-y-full'} shadow-2xl sm:h-full sm:min-w-[530px]  mt-auto container-board bg-white rounded-t-[12px] sm:rounded-[12px]  p-6`}>
+                className={`w-full ${T.clipboardModal ? 'sm:scale-100' : 'sm:scale-0 '} shadow-2xl sm:h-full sm:min-w-[530px] mb-auto bg-white rounded-t-[12px] sm:rounded-[12px]  p-6`}>
                 <div className={"w-full flex  justify-center sm:justify-end"}>
                     <button className={"hidden sm:block"} onClick={() => T.setClipboardModal(false)}>
                         <svg className={"opacity-60 hover:opacity-100"}

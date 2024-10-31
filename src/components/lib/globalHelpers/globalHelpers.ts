@@ -79,3 +79,23 @@ export const handleClickOutSide = (includeClasses: string[], setter: React.Dispa
         }
     })
 }
+
+export const handleFocus = () => {
+    const processContainer = document.querySelector("#process-container")
+    setTimeout(() => {
+        if (processContainer) {
+            processContainer.scrollIntoView({
+                behavior: "smooth",
+                block: "end"
+            });
+        }
+    }, 300);
+};
+
+export const handler = (modalContainer: React.MutableRefObject<HTMLDivElement | null>, state: boolean) => {
+    if (modalContainer.current) {
+        const documentHeight = document.documentElement.clientHeight;
+        const containerHeight = modalContainer.current.clientHeight;
+        modalContainer.current.style.transform = `translateY(calc(${documentHeight - containerHeight}px + ${state ? '0px' : '100%'}))`
+    }
+}

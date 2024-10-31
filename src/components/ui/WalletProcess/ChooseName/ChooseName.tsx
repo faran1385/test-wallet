@@ -2,6 +2,7 @@ import {Currency} from "./Currency/Currency.tsx";
 import {useAtom} from "jotai/index";
 import {processAtom, selectedCurrencyAtom} from "../../../lib/Atom/walletProcess/walletProcess.ts";
 import {useState} from "react";
+import {handleFocus} from "../../../lib/globalHelpers/globalHelpers.ts";
 
 const pattern = /[a-zA-Z]/;
 
@@ -41,6 +42,7 @@ export const ChooseName = () => {
                             style={{transition: "border-color .3s ease-in-out"}}
                             className={`rounded-[48px] border-[1px] ${inputIsValid ? 'border-wallet-green' : ''} flex relative `}>
                             <input
+                                onFocus={handleFocus}
                                 onChange={(e) => changeHandler(e.target)}
                                 placeholder="Wallet Name"
                                 type={'text'}

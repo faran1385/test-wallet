@@ -2,7 +2,7 @@ import {useState} from "react";
 import axios from "axios";
 import {useAtom} from "jotai";
 import {processAtom} from "../../../lib/Atom/walletProcess/walletProcess.ts";
-
+import {handleFocus} from "../../../lib/globalHelpers/globalHelpers.ts";
 
 // patterns
 const hasSpecialCharsPattern = /[!@#$%^&*(),.?":{}|<>]/
@@ -68,17 +68,6 @@ export const CreatePasswordState = () => {
         }
     }
 
-    const handleFocus = () => {
-        const processContainer = document.querySelector("#process-container")
-        setTimeout(() => {
-            if (processContainer) {
-                processContainer.scrollIntoView({
-                    behavior: "smooth",
-                    block: "end"
-                });
-            }
-        }, 300);
-    };
 
     return <div className={"flex justify-between sm:pb-0 pb-8 flex-col h-full"}>
         <div className={"sm:mt-8 my-auto"}>
@@ -125,7 +114,8 @@ export const CreatePasswordState = () => {
                         *Strong passwords are <span
                         className={`${submitRequirements.includesTenChars ? 'text-wallet-green font-bold' : ''}`}>10 characters or more</span>,
                         and&nbsp;
-                        <span className={`${submitRequirements.includesSpecialChars ? 'text-wallet-green font-bold' : ''}`}>include special characters</span>
+                        <span
+                            className={`${submitRequirements.includesSpecialChars ? 'text-wallet-green font-bold' : ''}`}>include special characters</span>
                         &nbsp;and&nbsp;<span
                         className={`${submitRequirements.includesNumbers ? 'text-wallet-green font-bold' : ''}`}> numbers.</span>
                     </p>

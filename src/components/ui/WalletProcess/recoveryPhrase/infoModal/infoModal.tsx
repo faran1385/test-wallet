@@ -1,14 +1,15 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {createPortal} from "react-dom";
 import {useAtom} from "jotai";
 import {infoModalAtom} from "../../../../lib/Atom/walletProcess/walletProcess.ts";
+import {handler} from "../../../../lib/globalHelpers/globalHelpers.ts";
 
 
 export const InfoModal = () => {
 
     const [body, setBody] = useState<null | HTMLElement>(null);
     const [infoModal, setInfoModal] = useAtom(infoModalAtom)
-
+    const modalContainerRef = useRef<null | HTMLDivElement>(null)
     useEffect(() => setBody(document.body), []);
 
     // adding overflow hidden
@@ -18,7 +19,20 @@ export const InfoModal = () => {
         } else {
             document.body.classList.remove("overflow-y-hidden")
         }
-    }, [infoModal]);
+        // css in js
+        handler(modalContainerRef, infoModal)
+    }, [infoModal, body]);
+
+    // css in js
+    useEffect(() => {
+        const resize = () => handler(modalContainerRef, infoModal)
+        window.addEventListener("resize", resize);
+
+        return () => {
+            window.removeEventListener("resize", resize);
+        }
+    }, [body]);
+
 
     return <>
         {body && createPortal(<div
@@ -27,12 +41,13 @@ export const InfoModal = () => {
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                 backdropFilter: "blur(5px)"
             }}
-            className={`w-full  fixed ${infoModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}  z-10 inset-0 h-screen flex  sm:grid sm:place-content-center`}>
+            className={`w-full fixed ${infoModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}  z-10 inset-0 h-screen flex  sm:grid sm:place-content-center`}>
             <div
+                ref={modalContainerRef}
                 style={{
                     transition: "transform ease-in-out .3s",
                 }}
-                className={`w-full ${infoModal ? 'sm:scale-100 translate-y-0' : 'sm:scale-0 sm:translate-y-0 translate-y-full'} shadow-2xl sm:h-full sm:w-[530px]  mt-auto  bg-white rounded-t-[12px] sm:rounded-[12px]  p-6`}>
+                className={`w-full ${infoModal ? 'sm:scale-100' : 'sm:scale-0 sm:translate-y-0'} shadow-2xl sm:h-full sm:w-[530px] mb-auto  bg-white rounded-t-[12px] sm:rounded-[12px]  p-6`}>
                 <div className={"w-full flex justify-center sm:justify-end"}>
                     <button onClick={() => setInfoModal(false)}>
                         <svg className={"sm:block hidden opacity-60 hover:opacity-100"}
@@ -45,7 +60,8 @@ export const InfoModal = () => {
                                 fill="#686D74" stroke="#686D74"/>
                         </svg>
                     </button>
-                    <span className={"w-6 block sm:hidden cursor-pointer h-[5px] rounded-2xl bg-wallet-dark"} onClick={() => setInfoModal(false)}></span>
+                    <span className={"w-6 block sm:hidden cursor-pointer h-[5px] rounded-2xl bg-wallet-dark"}
+                          onClick={() => setInfoModal(false)}></span>
                 </div>
                 <div className={"mt-6"}>
                     <h1 className={"text-center font-bold text-2xl"}>Back up your Secret <br

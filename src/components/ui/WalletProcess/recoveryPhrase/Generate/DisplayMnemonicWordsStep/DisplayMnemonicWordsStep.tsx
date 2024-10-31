@@ -1,7 +1,7 @@
 import {RecoveryPhraseButton} from "../recoveryPhraseButton/RecoveryPhraseButton.tsx";
 import {AnimatePresence, motion, Variants} from "framer-motion";
 import {CopyToClipboardModal} from "../copyToClipboardModal/copyToClipboardModal.tsx";
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {ethers} from "ethers";
 import "./style.css"
 import {recoveryGenerateProcessType} from "../../../../../lib/Atom/walletProcess/walletProcess.ts";
@@ -73,6 +73,30 @@ export const DisplayMnemonicWordsStep: React.FC<DisplayMnemonicWordsStepProps> =
         }
     };
 
+    const phrasesContainer = useRef<null | HTMLDivElement>(null)
+
+    useEffect(() => {
+        const handler = () => {
+            const cardContainer = document.querySelector(".process-card-container ")
+            if (cardContainer && phrasesContainer.current) {
+                const cardContainerHeight = cardContainer.clientHeight + 60
+                const phrasesContainerHeight = phrasesContainer.current.clientHeight
+                const documentHeight = document.documentElement.clientHeight
+
+                if (cardContainerHeight >= documentHeight) {
+                    const heightDifferenceBetweenDocAndCard = cardContainerHeight - documentHeight
+                    phrasesContainer.current.style.maxHeight = phrasesContainerHeight - heightDifferenceBetweenDocAndCard + 'px'
+                } else {
+                    phrasesContainer.current.style.maxHeight = 'inherit'
+                }
+            }
+        }
+
+        handler()
+        window.addEventListener('resize', handler)
+        return () => window.removeEventListener('resize', handler)
+    }, [phrases]);
+
     return <>
         <div className="w-full h-full sm:pb-0 pb-8 flex flex-col items-center">
             <div className={"sm:mt-8 my-auto"}>
@@ -90,10 +114,11 @@ export const DisplayMnemonicWordsStep: React.FC<DisplayMnemonicWordsStepProps> =
                 </div>
                 <div className="sm:block grid mt-8 gap-4">
                     <div
-                        className="grid px-4 phrases-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
+                        ref={phrasesContainer}
+                        className="grid px-4 max-h-[300px] phrases-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
                         {phrases[`${selectedPhraseCount}`].length > 0 ? phrases[`${selectedPhraseCount}`].map((phrase, i) => {
                             return <RecoveryPhraseButton text={phrase} key={phrase + i} number={i + 1}/>
-                        }) : (Array(12).fill("loading").map((phrase, i) => {
+                        }) : (Array(selectedPhraseCount).fill("loading").map((phrase, i) => {
                             return <RecoveryPhraseButton key={i} number={i + 1} loading={true} text={phrase}/>
                         }))}
                     </div>
