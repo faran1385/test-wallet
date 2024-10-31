@@ -31,7 +31,7 @@ export const InfoModal = () => {
         return () => {
             window.removeEventListener("resize", resize);
         }
-    }, [body]);
+    }, [body, infoModal]);
 
 
     return <>

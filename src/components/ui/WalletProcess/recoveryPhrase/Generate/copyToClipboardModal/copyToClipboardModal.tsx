@@ -64,7 +64,7 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
         return () => {
             window.removeEventListener("resize", resize);
         }
-    }, [body]);
+    }, [body, T.clipboardModal]);
 
 
     return <>
@@ -80,7 +80,7 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
                 style={{
                     transition: "transform ease-in-out .3s",
                 }}
-                className={`w-full ${T.clipboardModal ? 'sm:scale-100' : 'sm:scale-0 '} shadow-2xl sm:h-full sm:min-w-[530px] mb-auto bg-white rounded-t-[12px] sm:rounded-[12px]  p-6`}>
+                className={`w-full ${T.clipboardModal ? 'sm:scale-100' : 'sm:scale-0 '} sm:translate-y-[0!important] shadow-2xl sm:h-full sm:min-w-[530px] mb-auto bg-white rounded-t-[12px] sm:rounded-[12px]  p-6`}>
                 <div className={"w-full flex  justify-center sm:justify-end"}>
                     <button className={"hidden sm:block"} onClick={() => T.setClipboardModal(false)}>
                         <svg className={"opacity-60 hover:opacity-100"}

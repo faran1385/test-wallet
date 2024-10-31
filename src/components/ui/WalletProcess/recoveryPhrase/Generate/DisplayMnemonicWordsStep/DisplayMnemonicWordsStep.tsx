@@ -5,6 +5,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {ethers} from "ethers";
 import "./style.css"
 import {recoveryGenerateProcessType} from "../../../../../lib/Atom/walletProcess/walletProcess.ts";
+import {phrasesScrollHandler} from "../../../../../lib/globalHelpers/globalHelpers.ts";
 
 const copiedToClipBoardVariant: Variants = {
     hidden: {
@@ -77,19 +78,7 @@ export const DisplayMnemonicWordsStep: React.FC<DisplayMnemonicWordsStepProps> =
 
     useEffect(() => {
         const handler = () => {
-            const cardContainer = document.querySelector(".process-card-container ")
-            if (cardContainer && phrasesContainer.current) {
-                const cardContainerHeight = cardContainer.clientHeight + 60
-                const phrasesContainerHeight = phrasesContainer.current.clientHeight
-                const documentHeight = document.documentElement.clientHeight
-
-                if (cardContainerHeight >= documentHeight) {
-                    const heightDifferenceBetweenDocAndCard = cardContainerHeight - documentHeight
-                    phrasesContainer.current.style.maxHeight = phrasesContainerHeight - heightDifferenceBetweenDocAndCard + 'px'
-                } else {
-                    phrasesContainer.current.style.maxHeight = 'inherit'
-                }
-            }
+            phrasesScrollHandler(phrasesContainer)
         }
 
         handler()

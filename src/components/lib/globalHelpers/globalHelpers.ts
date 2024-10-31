@@ -92,10 +92,32 @@ export const handleFocus = () => {
     }, 300);
 };
 
+// css in js
 export const handler = (modalContainer: React.MutableRefObject<HTMLDivElement | null>, state: boolean) => {
-    if (modalContainer.current) {
+    if (modalContainer.current && window.innerWidth <= 640) {
         const documentHeight = document.documentElement.clientHeight;
         const containerHeight = modalContainer.current.clientHeight;
         modalContainer.current.style.transform = `translateY(calc(${documentHeight - containerHeight}px + ${state ? '0px' : '100%'}))`
+    } else if (modalContainer.current) {
+        modalContainer.current.style.transform = `translateY(0) scale(${state ? '1' : '0'})`
+    }
+}
+
+// css in js
+export const phrasesScrollHandler = (phrasesContainer: React.MutableRefObject<null | HTMLDivElement>) => {
+    const cardContainer = document.querySelector(".process-card-container ")
+    if (cardContainer && phrasesContainer.current) {
+        const cardContainerHeight = cardContainer.clientHeight + 60
+        const phrasesContainerHeight = phrasesContainer.current.clientHeight
+        const documentHeight = document.documentElement.clientHeight
+        console.log(phrasesContainerHeight, cardContainerHeight,phrasesContainerHeight)
+        if (cardContainerHeight >= documentHeight) {
+            const heightDifferenceBetweenDocAndCard = cardContainerHeight - documentHeight
+            phrasesContainer.current.style.maxHeight = phrasesContainerHeight - heightDifferenceBetweenDocAndCard + 'px'
+        } else {
+            phrasesContainer.current.style.maxHeight = 'inherit'
+        }
+
+        phrasesContainer.current.classList.remove("hidden")
     }
 }
