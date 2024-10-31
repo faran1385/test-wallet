@@ -15,7 +15,7 @@ export const useHandlePhrases = () => {
     // setting phrases
     useEffect(() => {
         setPhrases({
-            '12': bip39.generateMnemonic(256 * 12 / 24).split(" "),
+            '12': bip39.generateMnemonic(128).split(" "),
             '15': bip39.generateMnemonic(256 * 15 / 24).split(" "),
             '24': bip39.generateMnemonic(256).split(" "),
         })

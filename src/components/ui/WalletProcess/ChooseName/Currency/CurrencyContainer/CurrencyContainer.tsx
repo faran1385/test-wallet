@@ -1,10 +1,11 @@
+import "./style.css";
 import React, {useEffect, useRef} from "react";
 import {CurrencyItem} from "../CurrencyItem/CurrencyItem.tsx";
 import "./style.css"
 
 interface CurrencyContainerProps {
-    currencies: string[]
-    openContainer: boolean
+    currencies: any[];
+    openContainer: boolean;
 }
 
 export const CurrencyContainer: React.FC<CurrencyContainerProps> = (T) => {

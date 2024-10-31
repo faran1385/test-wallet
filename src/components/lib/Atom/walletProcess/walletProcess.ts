@@ -9,7 +9,8 @@ export type recoveryImportProcessType = "selectMnemonicLength" | "importPhrases"
 export type walletProcessType = "generate" | "import"
 
 export const processTypeArray: processType[] = ["welcome", "password", "recoveryPhrase", "chooseName", "waiting"]
-export const processAtom = atom<processType>("recoveryPhrase")
+export const processAtom = atom<processType>("welcome")
+export const userMnemonic = atom<string>('')
 
 // opening state of info modal
 export const infoModalAtom = atom(false)
@@ -26,5 +27,5 @@ export const recoveryImportProcessTypeArray: recoveryImportProcessType[] = ["sel
 export const recoveryImportProcessAtom = atom<recoveryImportProcessType>("selectMnemonicLength")
 
 // currency
-export const currencyListAtom = atom<string[]>(['dolor'])
+export const currencyListAtom = atom<any[]>([])
 export const selectedCurrencyAtom = atom<null | number>(null)
