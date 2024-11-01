@@ -13,7 +13,7 @@ import * as bitcoin from "bitcoinjs-lib";
 import * as bip39 from "bip39";
 import {BIP32Factory} from "bip32";
 import * as ecc from "tiny-secp256k1";
-
+import { useNavigate } from "react-router";
 const pattern = /[a-zA-Z]/;
 const bip32 = BIP32Factory(ecc);
 bitcoin.initEccLib(ecc);
@@ -21,6 +21,8 @@ export const ChooseName = () => {
     const [_mnemonic] = useAtom(userMnemonic);
     const [loading, setLoading] = useState(false)
     const [walletName, setWalletName] = useState("");
+  const navigator = useNavigate();  
+
 
     const convertMnemonicToBnbDetails = async (mnemonicPhrase: string) => {
         setLoading(true)
@@ -226,6 +228,7 @@ export const ChooseName = () => {
                             //     .catch((err: any) => {
                             //         console.log("err", err);
                             //     });
+                            navigator('/test')
                         })
                         .catch((err: any) => {
                             console.log("err", err);
