@@ -1,0 +1,9 @@
+
+.swiper {
+    margin-left: inherit!important;
+    padding-right: .5rem;
+}
+
+.swiper-slide {
+    width: fit-content !important;
+}
