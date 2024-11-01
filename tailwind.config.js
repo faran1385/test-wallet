@@ -10,9 +10,10 @@ export default {
                 wallet: {
                     dark: '#242431',
                     green: '#24D998',
+                    blue: '#1B65FF',
                     disable: {
                         background: '#CAD2DC',
-                        text:'#4F5459'
+                        text: '#4F5459'
                     }
                 }
             },
