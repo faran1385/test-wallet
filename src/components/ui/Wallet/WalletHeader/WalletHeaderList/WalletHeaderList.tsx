@@ -1,30 +1,42 @@
-import {WalletHeaderListItem} from "./WalletHeaderListItem/WalletHeaderListItem.tsx";
-
 export const WalletHeaderList = () => {
     return <>
-        <ul className={"px-2 sm:flex hidden space-x-[35px] lg:space-x-[50px]"}>
-            <WalletHeaderListItem active text={"Home"}>
-                <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="hidden sm:flex items-center gap-8">
+            <a
+                href="#"
+                style={{transition: '.3s color ease-in-out'}}
+                className="flex text-wallet-blue items-center gap-1 text-sm"
+            >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd"
-                          fill={'currentColor'}
-                          d="M4.5 0.5H16.5V3.5H4.5V0.5ZM2.25 5H17.25C17.664 5 18 5.336 18 5.75V17.75C18 18.164 17.664 18.5 17.25 18.5H3C1.34325 18.5 0 17.1567 0 15.5V4.25C0 3.00725 1.00725 2 2.25 2H3V3.5H2.25C1.83675 3.5 1.5 3.83675 1.5 4.25C1.5 4.66325 1.83675 5 2.25 5ZM12 11.75C12 12.5787 12.6713 13.25 13.5 13.25C14.3287 13.25 15 12.5787 15 11.75C15 10.9213 14.3287 10.25 13.5 10.25C12.6713 10.25 12 10.9213 12 11.75Z"
-                    />
+                          d="M7.5 3H19.5V6H7.5V3ZM5.25 7.5H20.25C20.664 7.5 21 7.836 21 8.25V20.25C21 20.664 20.664 21 20.25 21H6C4.34325 21 3 19.6567 3 18V6.75C3 5.50725 4.00725 4.5 5.25 4.5H6V6H5.25C4.83675 6 4.5 6.33675 4.5 6.75C4.5 7.16325 4.83675 7.5 5.25 7.5ZM15 14.25C15 15.0787 15.6713 15.75 16.5 15.75C17.3287 15.75 18 15.0787 18 14.25C18 13.4213 17.3287 12.75 16.5 12.75C15.6713 12.75 15 13.4213 15 14.25Z"
+                          fill="currentColor"/>
                 </svg>
-            </WalletHeaderListItem>
-            <WalletHeaderListItem text={"Payments"}>
-                <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <span className="">Home</span>
+            </a>
+            <a
+                href="../marketplace/index.html"
+                style={{transition: '.3s color ease-in-out'}}
+                className="flex items-center hover:text-wallet-blue text-[#868D96] gap-1 text-sm"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 33 32" fill="none">
                     <path
-                        d="M0 12.5H2C2 13.58 3.37 14.5 5 14.5C6.63 14.5 8 13.58 8 12.5C8 11.4 6.96 11 4.76 10.47C2.64 9.94 0 9.28 0 6.5C0 4.71 1.47 3.19 3.5 2.68V0.5H6.5V2.68C8.53 3.19 10 4.71 10 6.5H8C8 5.42 6.63 4.5 5 4.5C3.37 4.5 2 5.42 2 6.5C2 7.6 3.04 8 5.24 8.53C7.36 9.06 10 9.72 10 12.5C10 14.29 8.53 15.81 6.5 16.32V18.5H3.5V16.32C1.47 15.81 0 14.29 0 12.5Z"
-                        fill="currentColor"/>
-                </svg>
-            </WalletHeaderListItem>
-            <WalletHeaderListItem text={"Marketplace"}>
-                <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        d="M9 22H6C5.72386 22 5.5 22.2239 5.5 22.5V26.5C5.5 26.7761 5.72386 27 6 27H9C9.27614 27 9.5 26.7761 9.5 26.5V22.5C9.5 22.2239 9.27614 22 9 22Z"
+                        fill="currentColor"></path>
                     <path
-                        d="M16 5.5H14C14 2.7 11.8 0.5 9 0.5C6.2 0.5 4 2.7 4 5.5H2C0.9 5.5 0 6.4 0 7.5V19.5C0 20.6 0.9 21.5 2 21.5H16C17.1 21.5 18 20.6 18 19.5V7.5C18 6.4 17.1 5.5 16 5.5ZM9 2.5C10.7 2.5 12 3.8 12 5.5H6C6 3.8 7.3 2.5 9 2.5ZM16 19.5H2V7.5H16V19.5ZM9 11.5C7.3 11.5 6 10.2 6 8.5H4C4 11.3 6.2 13.5 9 13.5C11.8 13.5 14 11.3 14 8.5H12C12 10.2 10.7 11.5 9 11.5Z"
-                        fill="currentColor"/>
+                        d="M15 15H12C11.7239 15 11.5 15.2239 11.5 15.5V26.5C11.5 26.7761 11.7239 27 12 27H15C15.2761 27 15.5 26.7761 15.5 26.5V15.5C15.5 15.2239 15.2761 15 15 15Z"
+                        fill="currentColor"></path>
+                    <path
+                        d="M21 22H18C17.7239 22 17.5 22.2239 17.5 22.5V26.5C17.5 26.7761 17.7239 27 18 27H21C21.2761 27 21.5 26.7761 21.5 26.5V22.5C21.5 22.2239 21.2761 22 21 22Z"
+                        fill="currentColor"></path>
+                    <path
+                        d="M27 15H24C23.7239 15 23.5 15.2239 23.5 15.5V26.5C23.5 26.7761 23.7239 27 24 27H27C27.2761 27 27.5 26.7761 27.5 26.5V15.5C27.5 15.2239 27.2761 15 27 15Z"
+                        fill="currentColor"></path>
+                    <path
+                        d="M25.793 5.29301L19.5 11.586L14.207 6.29301C14.0195 6.10554 13.7652 6.00022 13.5 6.00022C13.2348 6.00022 12.9805 6.10554 12.793 6.29301L5.793 13.293C5.69749 13.3853 5.62131 13.4956 5.5689 13.6176C5.51649 13.7396 5.48891 13.8708 5.48775 14.0036C5.4866 14.1364 5.5119 14.2681 5.56218 14.391C5.61246 14.5139 5.68672 14.6255 5.78061 14.7194C5.8745 14.8133 5.98615 14.8876 6.10905 14.9378C6.23195 14.9881 6.36363 15.0134 6.49641 15.0123C6.62919 15.0111 6.76041 14.9835 6.88241 14.9311C7.00441 14.8787 7.11476 14.8025 7.20701 14.707L13.5 8.41401L18.793 13.707C18.9805 13.8945 19.2348 13.9998 19.5 13.9998C19.7652 13.9998 20.0195 13.8945 20.207 13.707L27.207 6.70701C27.3892 6.51841 27.49 6.26581 27.4877 6.00361C27.4854 5.74141 27.3802 5.4906 27.1948 5.30519C27.0094 5.11978 26.7586 5.01461 26.4964 5.01234C26.2342 5.01006 25.9816 5.11085 25.793 5.29301Z"
+                        fill="currentColor"></path>
                 </svg>
-            </WalletHeaderListItem>
-        </ul>
+                <span>Market</span>
+            </a>
+        </div>
     </>
 }

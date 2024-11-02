@@ -1,13 +1,13 @@
 import {WalletBalanceCardTitles} from "./WalletBalanceCardTitles/WalletBalanceCardTitles.tsx";
 import {WalletBalanceCardActions} from "./WalletBalanceCardActions/WalletBalanceCardActions.tsx";
 
+
 export const WalletBalanceCard = () => {
     return <>
         <div
-            className={"relative mt-4 sm:mt-8"}>
-            <img alt={''} className={"absolute h-full w-full object-cover top-0 rounded-xl"}
-                 src={'/imgs/balanceCardBackground.png'}/>
-            <div className={"relative z-[1] grid md:space-y-0 space-y-4 sm:space-y-8 md:grid-cols-2 items-center px-4 py-8 sm:p-8 sm:px-[60px] sm:py-[50px] w-full"}>
+            className="w-full md:h-[186px] rounded-xl bg-[#1B65FF] px-4 sm:px-9 py-4 sm:py-6 flex items-center"
+        >
+            <div className="w-full grid grid-cols-1 gap-y-4 sm:grid-cols-2">
                 <WalletBalanceCardTitles/>
                 <WalletBalanceCardActions/>
             </div>

@@ -3,13 +3,17 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Plus Jakarta Sans";
-  src: url("./assets/fonts/PlusJakartaSans-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "Plus Jakarta Sans";
+    src: url("./assets/fonts/PlusJakartaSans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
-  background: #ebeef0;
-  font-family: "Plus Jakarta Sans", sans-serif;
+    background: #ebeef0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.animate-svg *{
+    transform-box: fill-box;
 }

@@ -1,16 +1,22 @@
-import {WalletHeaderList} from "./WalletHeaderList/WalletHeaderList.tsx";
 import {WalletHeaderProfile} from "./WalletHeaderProfile/WalletHeaderProfile.tsx";
+import {WalletHeaderList} from "./WalletHeaderList/WalletHeaderList.tsx";
 import {WalletHeaderIcons} from "./WalletHeaderIcons/WalletHeaderIcons.tsx";
 
 export const WalletHeader = () => {
-    return <header className={"rounded-xl sm:bg-white sm:border-b border-b-[#BDC7D3]"}>
-        <div className={"sm:p-4 pt-4 pb-2 flex items-center justify-between"}>
+    return <header
+        className="w-[90%] sm:max-w-[1024px] mx-auto block h-16 sm:bg-white sm:border-b-[2px] sm:border-b-[#BDC7D3] rounded-xl py-4 sm:px-5 mt-3"
+    >
+        <div className="h-full  flex sm:grid grid-cols-3 items-center justify-between">
             <WalletHeaderProfile
-                image={'https://s3-alpha-sig.figma.com/img/894f/755a/99973199ef0a9424c450930ec2b456b5?Expires=1731283200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=MvY6BLoV2l4keqLKGq7o6ksqpvr8J5Y9nT2IddDKaCTt~QxbUYRQZd--SD0PO9zGFjkN2sAPBjVrsA5odWvumu2xFKVwwxqPP~n9RotoCThBzwWW5ul60nICPhCe4GFfxtHEZAT~QR5LlHnNFutiIQaEDIKCJfeMQ~Uq6BOqSPWkNyaltIUanJHvESQ3skRnDg4mdgUzWWKuEGGLqKRPA5jx~pRZ04bLbriIxA2s0AwYQt9gHikFLAlAqUV-5HsEBZCusqqpyOZKne7pLov1JnaBUCAAX6UyJ7p6SCzRwvKAr9734HrdJN~YII-yxUUsXDLcACGGiYCwO~V86Msprg__'}
-                name={'Main Wallet'}
+                name={"Main Wallet"}
+                image={"/imgs/sendReview/mainwallet.png"}
             />
-            <WalletHeaderList/>
-            <WalletHeaderIcons/>
+            <div className={"flex justify-center"}>
+                <WalletHeaderList/>
+            </div>
+            <div className={"flex justify-end"}>
+                <WalletHeaderIcons/>
+            </div>
         </div>
     </header>
 }

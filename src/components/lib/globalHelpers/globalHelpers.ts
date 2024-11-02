@@ -129,3 +129,12 @@ export const phrasesScrollHandler = (phrasesContainer: React.MutableRefObject<nu
         }
     }
 }
+
+
+export function formatNumberWithCommas(number:number) {
+    const fixedNumber = Number(number).toFixed(2);
+    const parts = fixedNumber.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
+

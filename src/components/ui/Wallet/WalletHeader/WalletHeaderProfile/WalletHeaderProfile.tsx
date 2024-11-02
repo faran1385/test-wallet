@@ -6,18 +6,22 @@ interface WalletHeaderProfileProps {
 }
 
 export const WalletHeaderProfile: React.FC<WalletHeaderProfileProps> = (T) => {
-    return <div
-        style={{transition:".3s color ease-in-out,.3s fill ease-in-out"}}
-        className={"flex space-x-2 sm:space-x-3 cursor-pointer text-[#686D74] hover:text-wallet-blue items-center"}>
-        <div className={"rounded-full border-[#E1E5EB] border-4"}>
+    return <div className="flex gap-3">
+        <div
+            style={{transition: '.3s color ease-in-out'}}
+            className="flex hover:text-wallet-blue text-[#686D74] items-center gap-3 cursor-pointer">
             <img
-                className={"rounded-full w-8 h-8"}
-                alt={"profile picture"}
-                src={T.image}/>
+                src={T.image}
+                alt="avatar"
+                className="h-6 w-6 rounded-full object-cover shadow-[0_0_0_5px_#E1E5EB]"
+            />
+            <span className=" text-sm"
+            >{T.name}</span
+            >
+            <svg width="12" height="12" viewBox="0 0 12 12" className={"mt-1"} xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.625 8L0 2H11.25L5.625 8Z" fill="currentColor"/>
+            </svg>
+
         </div>
-        <span className={"font-medium  text-[14px]"}>{T.name}</span>
-        <svg className={"lg:block hidden"} width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5.625 6.5L0 0.5H11.25L5.625 6.5Z" fill="currentColor"/>
-        </svg>
     </div>
 }
