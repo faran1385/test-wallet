@@ -7,7 +7,7 @@ export const AssetsContent = () => {
     const [assets] = useAtom(assetsAtom)
 
     return <div className="mt-4 sm:mt-7 flex flex-col gap-2">
-        <div className={"wallet-asset-container gap-2 flex flex-col overflow-y-auto"}>
+        <div className={"wallet-asset-container px-1 gap-2 flex flex-col overflow-y-auto"}>
             {assets.length > 0 ? assets.map((asset, i) => {
                 return <Asset
                     key={i}
