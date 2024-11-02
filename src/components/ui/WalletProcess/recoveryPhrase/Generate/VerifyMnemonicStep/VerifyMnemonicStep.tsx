@@ -8,7 +8,7 @@ import {RecoveryPhraseButton} from "../recoveryPhraseButton/RecoveryPhraseButton
 import {useAtom} from "jotai";
 import {
     getRandomNumberArray,
-    getThNumber, phrasesScrollHandler,
+    getThNumber,
     randomNumber,
     replaceAllItems,
     shuffleArray,
@@ -19,6 +19,7 @@ import * as bip39 from "bip39";
 import {BIP32Factory} from "bip32";
 import * as ecc from "tiny-secp256k1";
 import axios from "axios";
+import "./style.css"
 
 interface VerifyMnemonicStepProps {
     selectedPhraseCount: 12 | 15 | 24;
@@ -309,17 +310,6 @@ export const VerifyMnemonicStep: React.FC<VerifyMnemonicStepProps> = (T) => {
         }
     }, [phrases]);
 
-    const phrasesContainer = useRef<null | HTMLDivElement>(null)
-
-    useEffect(() => {
-        const handler = () => {
-            phrasesScrollHandler(phrasesContainer)
-        }
-        handler()
-        window.addEventListener('resize', handler)
-        return () => window.removeEventListener('resize', handler)
-    }, [phrasesShuffledArray]);
-
     return (
         <>
             <div className="w-full h-full sm:pb-0 pb-8 flex flex-col items-center">
@@ -360,8 +350,7 @@ export const VerifyMnemonicStep: React.FC<VerifyMnemonicStepProps> = (T) => {
                     </div>
                     <div className="sm:block grid mt-8 gap-4">
                         <div
-                            ref={phrasesContainer}
-                            className="grid  px-4 pt-1 phrases-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
+                            className="grid  px-4 pt-1 verify-phrase-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
                             {phrasesShuffledArray.length > 0
                                 ? phrasesShuffledArray.map((phrase, i) => {
                                     return (

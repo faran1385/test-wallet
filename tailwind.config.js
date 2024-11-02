@@ -16,7 +16,7 @@ export default {
                         text: '#4F5459'
                     }
                 }
-            },
+            }
         },
     },
     plugins: [],

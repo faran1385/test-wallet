@@ -1,10 +1,16 @@
 import {WalletHeaderProfile} from "./WalletHeaderProfile/WalletHeaderProfile.tsx";
 import {WalletHeaderList} from "./WalletHeaderList/WalletHeaderList.tsx";
 import {WalletHeaderIcons} from "./WalletHeaderIcons/WalletHeaderIcons.tsx";
+import React from "react";
 
-export const WalletHeader = () => {
+interface WalletHeaderProps {
+    additionalClasses?: string
+}
+
+export const WalletHeader: React.FC<WalletHeaderProps> = (T) => {
     return <header
-        className="w-[90%] sm:max-w-[1024px] mx-auto block h-16 sm:bg-white sm:border-b-[2px] sm:border-b-[#BDC7D3] rounded-xl py-4 sm:px-5 mt-3"
+
+        className={`w-[90%] ${T.additionalClasses} sm:max-w-[1024px] mx-auto block h-16 sm:bg-white sm:border-b-[2px] sm:border-b-[#BDC7D3] rounded-xl py-4 sm:px-5 mt-3`}
     >
         <div className="h-full  flex sm:grid grid-cols-3 items-center justify-between">
             <WalletHeaderProfile

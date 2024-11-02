@@ -1,111 +1,31 @@
-import {asset, Asset} from "../Asset/Asset.tsx";
-
-const assets: asset[] = [
-    {
-        name: 'BTC',
-        icon: '/imgs/home/Bitcoin.png',
-        value: {
-            currency: 'USD',
-            amount: 62402
-        },
-        asset: {
-            value: {
-                currency: "USD",
-                amount: 73327.57
-            },
-            count: 1.0002311,
-            profitOrLost: 2.43
-        },
-        category: 'Bitcoin',
-    },
-    {
-        name: 'ETH',
-        icon: '/imgs/home/Wallet Earn.png',
-        value: {
-            currency: 'USD',
-            amount: 62402
-        },
-        asset: {
-            value: {
-                currency: "USD",
-                amount: 73327.57
-            },
-            count: 1.0002311,
-            profitOrLost: 2.43
-        },
-        category: 'Ethereum',
-    },
-    {
-        name: 'USDT',
-        icon: '/imgs/home/usdT.png',
-        value: {
-            currency: 'USD',
-            amount: 62402
-        },
-        asset: {
-            value: {
-                currency: "USD",
-                amount: 73327.57
-            },
-            count: 1.0002311,
-            profitOrLost: 2.43
-        },
-        category: 'Tether'
-    },
-    {
-        name: 'LTC',
-        icon: '/imgs/home/ETH.png',
-        value: {
-            currency: 'USD',
-            amount: 62402
-        },
-        asset: {
-            value: {
-                currency: "USD",
-                amount: 73327.57
-            },
-            count: 1.0002311,
-            profitOrLost: 2.43
-        },
-        category: 'Litecoin'
-    },
-    {
-        name: 'XRP',
-        icon: '/imgs/home/Nebulas (NAS).png',
-        value: {
-            currency: 'USD',
-            amount: 62402
-        },
-        asset: {
-            value: {
-                currency: "USD",
-                amount: 73327.57
-            },
-            count: 1.0002311,
-            profitOrLost: 2.43
-        },
-        category: 'Ripple',
-    },
-]
+import {Asset} from "../Asset/Asset.tsx";
+import {useAtom} from "jotai";
+import {assetsAtom} from "../../../../lib/Atom/WalletMain/walletMain.ts";
+import "./style.css"
 
 export const AssetsContent = () => {
+    const [assets] = useAtom(assetsAtom)
+
     return <div className="mt-4 sm:mt-7 flex flex-col gap-2">
-        {assets.length > 0 ? assets.map((asset, i) => {
-            return <Asset
-                key={i}
-                {...asset}
-            />
-        }) : [1, 2, 3, 4, 5].map((value) => {
-            return <div
-                key={value}
-                className="animate-pulse h-[82px] px-4 py-4 sm:py-5 bg-[rgba(0,0,0,.3)] shadow-sm rounded-lg sm:relative"
-            >
-            </div>
-        })}
+        <div className={"wallet-asset-container gap-2 flex flex-col overflow-y-auto"}>
+            {assets.length > 0 ? assets.map((asset, i) => {
+                return <Asset
+                    key={i}
+                    usage={"main"}
+                    req={{...asset}}
+                />
+            }) : [1, 2, 3, 4, 5].map((value) => {
+                return <div
+                    key={value}
+                    className="animate-pulse h-[82px] px-4 py-4 sm:py-5 bg-[rgba(0,0,0,.3)] shadow-sm rounded-lg sm:relative"
+                >
+                </div>
+            })}
+        </div>
         <h3 className="text-black text-lg font-bold leading-normal mt-4 sm:hidden">
             Others
         </h3>
-        <div className="md:hidden relative flex flex-col items-center mt-4 sm:hiddenz">
+        <div className="mb-[90px] md:hidden relative flex flex-col items-center mt-4 sm:hiddenz">
             <div
                 className="w-full h-[72px] px-4 py-2 bg-white rounded-lg shadow border-b border-[#ebeef1] inline-flex justify-start items-center gap-3 z-[3]"
             >
@@ -122,10 +42,12 @@ export const AssetsContent = () => {
                                 </div>
                             </div>
                             <img
+                                alt={""}
                                 className="w-3.5 h-3.5 left-[18px] top-[25px] absolute rounded-[20px]"
                                 src="/svg/home/Eth.svg"
                             />
                             <img
+                                alt={""}
                                 className="w-8 h-8 pt-[3.25px] pb-[3px] -left-2.5 top-[16px] absolute rounded-[20px] justify-center items-center inline-flex"
                                 src="/svg/home/Bitcoin.svg"
                             />

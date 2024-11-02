@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 export const AssetsHeader = () => {
     return <>
         <div className="h-6 mt-3 w-full inline-flex justify-between items-center sm:hidden">
@@ -17,7 +19,7 @@ export const AssetsHeader = () => {
             <div className="grid grid-cols-3 lg:grid-cols-2 items-center">
                 <div className="col-span-1 lg:col-span-1">
                     <div className="flex items-center gap-4">
-                        <div
+                        <Link to={"manage-assets"}
                             style={{transition: "background-color .3s ease-in-out,color .3s ease-in-out,border-color .3s ease-in-out"}}
                             className=" h-12 w-12 p-4 text-[#686D74] hover:bg-white hover:text-wallet-blue bg-[#E1E5EB] rounded-full border border-[#BDC7D3] cursor-pointer"
                         >
@@ -27,7 +29,7 @@ export const AssetsHeader = () => {
                                     d="M8 6.49609H13.5V7.49609H8H7.5V7.99609V13.4961H6.5V7.99609V7.49609H6H0.5V6.49609H6H6.5V5.99609V0.496094H7.5V5.99609V6.49609H8Z"
                                     fill="currentColor" stroke="currentColor"/>
                             </svg>
-                        </div>
+                        </Link>
                         <span className="font-semibold">Manage Assets</span>
                     </div>
                 </div>

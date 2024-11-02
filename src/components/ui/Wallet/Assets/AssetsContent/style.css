@@ -1,0 +1,10 @@
+.wallet-asset-container {
+    max-height: calc(100vh - 550px);
+}
+
+
+@media (min-width: 640px) {
+    .wallet-asset-container {
+        max-height: calc(100vh - 458px);
+    }
+}

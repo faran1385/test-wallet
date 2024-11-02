@@ -103,34 +103,6 @@ export const handler = (modalContainer: React.MutableRefObject<HTMLDivElement | 
     }
 }
 
-// css in js
-export const phrasesScrollHandler = (phrasesContainer: React.MutableRefObject<null | HTMLDivElement>) => {
-    const cardContainer = document.querySelector(".process-card-container ")
-    if (cardContainer && phrasesContainer.current) {
-        const cardContainerHeight = cardContainer.clientHeight + 60
-        const phrasesContainerHeight = phrasesContainer.current.clientHeight
-        const documentHeight = document.documentElement.clientHeight
-
-        if (cardContainerHeight >= documentHeight) {
-            const heightDifferenceBetweenDocAndCard = cardContainerHeight - documentHeight
-            phrasesContainer.current.style.maxHeight = phrasesContainerHeight - heightDifferenceBetweenDocAndCard + 'px'
-        } else {
-            console.log(cardContainerHeight, documentHeight, phrasesContainer)
-            phrasesContainer.current.style.maxHeight = 'inherit'
-            setTimeout(() => {
-                const cardContainerHeight = cardContainer.clientHeight + 60
-                const phrasesContainerHeight = (phrasesContainer.current as any).clientHeight
-                const documentHeight = document.documentElement.clientHeight
-                if (cardContainerHeight >= documentHeight) {
-                    const heightDifferenceBetweenDocAndCard = cardContainerHeight - documentHeight;
-                    (phrasesContainer.current as any).style.maxHeight = phrasesContainerHeight - heightDifferenceBetweenDocAndCard + 'px'
-                }
-            }, 1)
-        }
-    }
-}
-
-
 export function formatNumberWithCommas(number:number) {
     const fixedNumber = Number(number).toFixed(2);
     const parts = fixedNumber.split(".");

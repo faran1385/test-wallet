@@ -1,11 +1,10 @@
 import {RecoveryPhraseButton} from "../recoveryPhraseButton/RecoveryPhraseButton.tsx";
 import {AnimatePresence, motion, Variants} from "framer-motion";
 import {CopyToClipboardModal} from "../copyToClipboardModal/copyToClipboardModal.tsx";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState} from "react";
 import {ethers} from "ethers";
 import "./style.css"
 import {recoveryGenerateProcessType} from "../../../../../lib/Atom/walletProcess/walletProcess.ts";
-import {phrasesScrollHandler} from "../../../../../lib/globalHelpers/globalHelpers.ts";
 
 const copiedToClipBoardVariant: Variants = {
     hidden: {
@@ -74,17 +73,6 @@ export const DisplayMnemonicWordsStep: React.FC<DisplayMnemonicWordsStepProps> =
         }
     };
 
-    const phrasesContainer = useRef<null | HTMLDivElement>(null)
-
-    useEffect(() => {
-        const handler = () => {
-            phrasesScrollHandler(phrasesContainer)
-        }
-
-        handler()
-        window.addEventListener('resize', handler)
-        return () => window.removeEventListener('resize', handler)
-    }, [phrases]);
 
     return <>
         <div className="w-full h-full sm:pb-0 pb-8 flex flex-col items-center">
@@ -103,8 +91,7 @@ export const DisplayMnemonicWordsStep: React.FC<DisplayMnemonicWordsStepProps> =
                 </div>
                 <div className="sm:block grid mt-8 gap-4">
                     <div
-                        ref={phrasesContainer}
-                        className="grid px-4 max-h-[300px] phrases-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
+                        className="grid px-4 display-phrase-container overflow-y-auto palce-items-center gap-4 grid-cols-3 sm:gap-5 text-[12px] sm:text-[14px]">
                         {phrases[`${selectedPhraseCount}`].length > 0 ? phrases[`${selectedPhraseCount}`].map((phrase, i) => {
                             return <RecoveryPhraseButton text={phrase} key={phrase + i} number={i + 1}/>
                         }) : (Array(selectedPhraseCount).fill("loading").map((phrase, i) => {

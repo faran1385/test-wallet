@@ -1,5 +1,11 @@
-export const MobileWalletNavigation = () => {
-    return <div className="navigation-bottom">
+import React from "react";
+
+interface MobileWalletNavigationProps {
+    additionalClasses?: string
+}
+
+export const MobileWalletNavigation: React.FC<MobileWalletNavigationProps> = (T) => {
+    return <div className={`navigation-bottom ${T.additionalClasses}`}>
         <div
             className="w-full h-20 fixed bottom-0 left-0 right-0 bg-[#EBEEF1] border-t-2 border-t-[#E5E5EA] md:hidden z-[999] flex justify-center"
         >
