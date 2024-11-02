@@ -3,7 +3,7 @@ import {AssetsContent} from "./AssetsContent/AssetsContent.tsx";
 
 
 export const Assets = () => {
-    return <div className={"mt-8"}>
+    return <div>
         <AssetsHeader/>
         <AssetsContent/>
     </div>

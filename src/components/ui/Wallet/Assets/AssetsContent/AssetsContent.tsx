@@ -17,7 +17,6 @@ const assets: asset[] = [
             profitOrLost: 2.43
         },
         category: 'Bitcoin',
-        toBTC: 0.200,
     },
     {
         name: 'ETH',
@@ -35,7 +34,6 @@ const assets: asset[] = [
             profitOrLost: 2.43
         },
         category: 'Ethereum',
-        toBTC: 0.200,
     },
     {
         name: 'USDT',
@@ -52,7 +50,6 @@ const assets: asset[] = [
             count: 1.0002311,
             profitOrLost: 2.43
         },
-        toBTC: 0.200,
         category: 'Tether'
     },
     {
@@ -70,7 +67,6 @@ const assets: asset[] = [
             count: 1.0002311,
             profitOrLost: 2.43
         },
-        toBTC: 0.200,
         category: 'Litecoin'
     },
     {
@@ -88,7 +84,6 @@ const assets: asset[] = [
             count: 1.0002311,
             profitOrLost: 2.43
         },
-        toBTC: 0.200,
         category: 'Ripple',
     },
 ]

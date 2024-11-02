@@ -11,7 +11,6 @@ export type asset = {
         value: valueType,
         count: number
     },
-    toBTC: number,
 }
 
 export type valueType = {
@@ -20,7 +19,6 @@ export type valueType = {
 }
 
 export const Asset: React.FC<asset> = (T) => {
-
 
 
     return <>
@@ -94,7 +92,7 @@ export const Asset: React.FC<asset> = (T) => {
                     </div>
                 </div>
                 <div className="flex sm:hidden justify-end items-end gap-2">
-                    <span className="text-xs">{formatNumberWithCommas(T.toBTC)} BTC</span>
+                    <span className="text-xs">{formatNumberWithCommas(T.asset.count)} {T.name}</span>
                 </div>
             </a>
         </div>

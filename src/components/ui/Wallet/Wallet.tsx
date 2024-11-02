@@ -8,7 +8,7 @@ import {MobileWalletNavigation} from "./MobileWalletNavigation/MobileWalletNavig
 export const Wallet = () => {
     return <>
         <WalletHeader/>
-        <main className="w-[90%] sm:max-w-[1024px] mx-auto flex flex-col mt-5 pb-28">
+        <main className="w-[90%] sm:max-w-[1024px] mx-auto flex flex-col mt-5 px-0 pb-4">
             <WalletBalanceCard/>
             <WalletTabs/>
             <PromoCard/>
