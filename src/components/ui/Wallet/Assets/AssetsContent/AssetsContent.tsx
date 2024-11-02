@@ -95,11 +95,17 @@ const assets: asset[] = [
 
 export const AssetsContent = () => {
     return <div className="mt-4 sm:mt-7 flex flex-col gap-2">
-        {assets.map((asset, i) => {
+        {assets.length > 0 ? assets.map((asset, i) => {
             return <Asset
                 key={i}
                 {...asset}
             />
+        }) : [1, 2, 3, 4, 5].map((value) => {
+            return <div
+                key={value}
+                className="animate-pulse h-[82px] px-4 py-4 sm:py-5 bg-[rgba(0,0,0,.3)] shadow-sm rounded-lg sm:relative"
+            >
+            </div>
         })}
         <h3 className="text-black text-lg font-bold leading-normal mt-4 sm:hidden">
             Others

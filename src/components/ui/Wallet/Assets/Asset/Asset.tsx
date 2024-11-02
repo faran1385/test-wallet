@@ -11,7 +11,7 @@ export type asset = {
         value: valueType,
         count: number
     },
-    toBTC: number
+    toBTC: number,
 }
 
 export type valueType = {
@@ -20,10 +20,13 @@ export type valueType = {
 }
 
 export const Asset: React.FC<asset> = (T) => {
+
+
+
     return <>
         <div
             style={{
-                transition:".3s box-shadow ease-in-out",
+                transition: ".3s box-shadow ease-in-out",
             }}
             className="hover:shadow-xl sm:h-[82px] px-4 py-4 sm:py-5 bg-white md:bg-[#f8f9fb] shadow-sm rounded-lg sm:relative"
         >
