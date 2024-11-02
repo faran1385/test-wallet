@@ -12,7 +12,7 @@ export const ManageAssetsFooter = () => {
             <div className={"flex space-x-4"}>
                 <button
                     style={{transition: "ease-in-out .3s background-color,ease-in-out .3s color"}}
-                    className={"border flex justify-center items-center hover:text-white text-wallet-green border-wallet-green  hover:bg-wallet-green w-8 h-8 rounded"}>
+                    className={"border flex justify-center items-center hover:text-white text-wallet-blue border-wallet-blue  hover:bg-wallet-blue w-8 h-8 rounded"}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20"
                          fill="currentColor">
                         <path fillRule="evenodd"
@@ -23,12 +23,12 @@ export const ManageAssetsFooter = () => {
                     </svg>
                 </button>
                 <span
-                    className={"border text-[18px] flex justify-center items-center text-white  bg-wallet-green min-w-8 px-1 h-8 rounded "}>
+                    className={"border flex justify-center items-center text-white  bg-wallet-blue min-w-8 px-1 h-8 rounded "}>
                         125
                     </span>
                 <button
                     style={{transition: "ease-in-out .3s background-color,ease-in-out .3s color"}}
-                    className={"border flex justify-center items-center hover:text-white text-wallet-green border-wallet-green  hover:bg-wallet-green w-8 h-8 rounded "}>
+                    className={"border flex justify-center items-center hover:text-white text-wallet-blue border-wallet-blue  hover:bg-wallet-blue w-8 h-8 rounded "}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 rotate-180 w-3" viewBox="0 0 20 20"
                          fill="currentColor">
                         <path fillRule="evenodd"

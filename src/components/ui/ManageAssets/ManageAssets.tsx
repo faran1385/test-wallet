@@ -54,7 +54,6 @@ const assets: manageAsset[] = [
 ]
 
 export const ManageAssets = () => {
-
     return <>
         <main className="w-[90%] h-dvh sm:max-w-[1024px] mx-auto flex flex-col mt-8 pb-4">
             <div className="w-full flex justify-center items-center relative sm:hidden">
