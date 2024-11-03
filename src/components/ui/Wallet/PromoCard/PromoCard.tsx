@@ -2,7 +2,7 @@ export const PromoCard = () => {
     return <>
         <div className="sm:hidden mt-3 relative">
             <div
-                className="absolute top-8 right-3 bg-[#FFFFFF20] rounded-full p-1 cursor-pointer z-10"
+                className="absolute top-[20%] right-3 bg-[#FFFFFF20] rounded-full p-1 cursor-pointer z-10"
             >
                 <img
                     src="/svg/home/close.svg"

@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {createPortal} from "react-dom";
 import {useAtom} from "jotai";
 import {infoModalAtom} from "../../../../lib/Atom/walletProcess/walletProcess.ts";
@@ -6,11 +6,8 @@ import {handler} from "../../../../lib/globalHelpers/globalHelpers.ts";
 
 
 export const InfoModal = () => {
-
-    const [body, setBody] = useState<null | HTMLElement>(null);
     const [infoModal, setInfoModal] = useAtom(infoModalAtom)
     const modalContainerRef = useRef<null | HTMLDivElement>(null)
-    useEffect(() => setBody(document.body), []);
 
     // adding overflow hidden
     useEffect(() => {
@@ -21,7 +18,7 @@ export const InfoModal = () => {
         }
         // css in js
         handler(modalContainerRef, infoModal)
-    }, [infoModal, body]);
+    }, [infoModal]);
 
     // css in js
     useEffect(() => {
@@ -31,11 +28,11 @@ export const InfoModal = () => {
         return () => {
             window.removeEventListener("resize", resize);
         }
-    }, [body, infoModal]);
+    }, [infoModal]);
 
 
     return <>
-        {body && createPortal(<div
+        {createPortal(<div
             style={{
                 transition: "opacity ease-in-out .3s",
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -94,6 +91,6 @@ export const InfoModal = () => {
                     </div>
                 </div>
             </div>
-        </div>, body)}
+        </div>, document.body)}
     </>
 }

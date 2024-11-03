@@ -14,7 +14,7 @@ body {
     font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-.animate-svg *{
+.animate-svg * {
     transform-box: fill-box;
 }
 
@@ -32,4 +32,8 @@ body {
 ::-webkit-scrollbar-track {
     background: lightgrey;
     border-radius: 10px;
+}
+
+.bg-fade {
+    background-color: rgba(0, 0, 0, 0.5);
 }

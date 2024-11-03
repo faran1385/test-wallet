@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import {createPortal} from "react-dom";
 import {handler} from "../../../../../lib/globalHelpers/globalHelpers.ts";
 
@@ -10,11 +10,9 @@ interface CopyToClipboardModalProps {
 }
 
 export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => {
-    const [body, setBody] = useState<null | HTMLElement>(null);
 
     const modalContainerRef = useRef<HTMLDivElement | null>(null)
 
-    useEffect(() => setBody(document.body), []);
 
     const copyHandler = () => {
         T.setClipboardModal(false)
@@ -53,7 +51,7 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
         }
         // css in js
         handler(modalContainerRef, T.clipboardModal)
-    }, [T.clipboardModal, body]);
+    }, [T.clipboardModal]);
 
     // css in js
     useEffect(() => {
@@ -64,11 +62,11 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
         return () => {
             window.removeEventListener("resize", resize);
         }
-    }, [body, T.clipboardModal]);
+    }, [T.clipboardModal]);
 
 
     return <>
-        {body && createPortal(<div
+        {createPortal(<div
             style={{
                 transition: "opacity ease-in-out .3s",
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -128,6 +126,6 @@ export const CopyToClipboardModal: React.FC<CopyToClipboardModalProps> = (T) => 
                     </button>
                 </div>
             </div>
-        </div>, body)}
+        </div>, document.body)}
     </>
 }

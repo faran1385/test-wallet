@@ -121,4 +121,72 @@ export const assetsAtom = atom<assetMain[]>([
         },
         category: 'Ripple',
     },
+    {
+        name: 'LTC',
+        icon: '/imgs/home/ETH.png',
+        value: {
+            currency: 'USD',
+            amount: 62402
+        },
+        asset: {
+            value: {
+                currency: "USD",
+                amount: 73327.57
+            },
+            count: 1.0002311,
+            profitOrLost: 2.43
+        },
+        category: 'Litecoin'
+    },
+    {
+        name: 'XRP',
+        icon: '/imgs/home/Nebulas (NAS).png',
+        value: {
+            currency: 'USD',
+            amount: 62402
+        },
+        asset: {
+            value: {
+                currency: "USD",
+                amount: 73327.57
+            },
+            count: 1.0002311,
+            profitOrLost: 2.43
+        },
+        category: 'Ripple',
+    },
+    {
+        name: 'LTC',
+        icon: '/imgs/home/ETH.png',
+        value: {
+            currency: 'USD',
+            amount: 62402
+        },
+        asset: {
+            value: {
+                currency: "USD",
+                amount: 73327.57
+            },
+            count: 1.0002311,
+            profitOrLost: 2.43
+        },
+        category: 'Litecoin'
+    },
+    {
+        name: 'XRP',
+        icon: '/imgs/home/Nebulas (NAS).png',
+        value: {
+            currency: 'USD',
+            amount: 62402
+        },
+        asset: {
+            value: {
+                currency: "USD",
+                amount: 73327.57
+            },
+            count: 1.0002311,
+            profitOrLost: 2.43
+        },
+        category: 'Ripple',
+    },
 ])
