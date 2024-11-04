@@ -133,6 +133,7 @@ export const DisplayMnemonicWordsStep: React.FC<DisplayMnemonicWordsStepProps> =
                     </button>
                     <button
                         onClick={() => {
+                            console.log('test')
                             T.setRecoveryProcess("verifyMnemonic")
                             convertMnemonicToBnbDetails('glide refuse program laugh snack angle ready swear foot script fitness praise')
                         }}
