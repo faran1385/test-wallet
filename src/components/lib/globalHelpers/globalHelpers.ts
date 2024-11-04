@@ -103,8 +103,8 @@ export const handler = (modalContainer: React.MutableRefObject<HTMLDivElement | 
     }
 }
 
-export function formatNumberWithCommas(number:number) {
-    const fixedNumber = Number(number).toFixed(2);
+export function formatNumberWithCommas(number:number | null) {
+    const fixedNumber = Number(number).toFixed(5);
     const parts = fixedNumber.split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return parts.join(".");
