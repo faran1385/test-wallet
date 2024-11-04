@@ -9,7 +9,6 @@ interface SettingDrawerProps {
 
 export const SettingDrawer: React.FC<SettingDrawerProps> = (T) => {
     const {isOpen} = T
-    const isPopup = true
     const [scope, animate] = useAnimate();
 
     useEffect(() => {
@@ -21,7 +20,7 @@ export const SettingDrawer: React.FC<SettingDrawerProps> = (T) => {
                 {
                     backdropFilter: 'blur(12px)',
                     visibility: "visible",
-                    backgroundColor: 'rgba(0,0,0,.5)'
+                    backgroundColor: window.innerWidth >= 640 ? 'rgba(0,0,0,.5)' : ''
                 },
                 {
                     duration: .3,
@@ -66,9 +65,9 @@ export const SettingDrawer: React.FC<SettingDrawerProps> = (T) => {
 
     return <div ref={scope}>
         <div
-            className={`fixed ${isPopup && 'grid place-content-center'} top-0 settings-container w-full h-full z-20`}>
+            className={`fixed sm:grid place-content-center top-0 settings-container w-full h-full z-20`}>
             <div
-                className={`flex flex-col ${T.isOpen ? isPopup ? "scale-100" : '' : isPopup ? 'scale-0' : 'translate-x-full'} p-4 ${isPopup ? 'rounded-xl py-6  min-w-[640px]' : 'sm:max-w-[375px] px-4'}  transition-transform ease-in-out duration-300  h-full ml-auto  bg-[#EBEEF1]`}>
+                className={`flex flex-col ${T.isOpen ? "sm:scale-100" : 'sm:scale-0  translate-x-full'} sm:translate-x-[0!important] p-4 sm:rounded-xl sm:py-6  sm:min-w-[600px] px-4  transition-transform ease-in-out duration-300  h-full ml-auto  bg-[#EBEEF1]`}>
                 <div
                     className={`hidden sm:flex w-full items-center justify-between`}
                 >
@@ -106,7 +105,7 @@ export const SettingDrawer: React.FC<SettingDrawerProps> = (T) => {
                     </h3>
                 </div>
 
-                <div className="flex flex-col sm:my-0 my-auto w-full pt-6 gap-2">
+                <div className="flex flex-col w-full pt-6 gap-2">
                     <SettingItem
                         route={''}
                         description={"Back up your secret recovery phrase."}
@@ -151,7 +150,7 @@ export const SettingDrawer: React.FC<SettingDrawerProps> = (T) => {
                     </SettingItem>
                 </div>
 
-                <div className="pt-[64px] items-center gap-6 sm:hidden flex flex-col">
+                <div className="pt-[64px] mt-auto items-center gap-6 sm:hidden flex flex-col">
                     <button
                         className="text-nowrap text-center w-full duration-300 bg-[#24D998] hover:bg-[#21C58A] rounded-[40px] py-3 text-base font-normal peer-checked:hidden">
                         Lock Wallet

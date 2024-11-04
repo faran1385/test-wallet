@@ -9,7 +9,7 @@ interface WalletHeaderProps {
 }
 
 export const WalletHeader: React.FC<WalletHeaderProps> = (T) => {
-    const [isSettingOpen, setIsSettingOpen] = useState(true);
+    const [isSettingOpen, setIsSettingOpen] = useState(false);
 
     return <>
         <header

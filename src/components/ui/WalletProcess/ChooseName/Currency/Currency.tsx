@@ -23,7 +23,7 @@ export const Currency: React.FC = () => {
 
   return (
     <div className="flex w-full mt-6 flex-col gap-2">
-      <span className="text-[14px] font-medium px-2">Name your new wallet</span>
+      <span className="text-[14px] font-medium px-2">Choose your default currency</span>
       <div
         style={{ transition: "border-color .3s ease-in-out" }}
         className={`rounded-[48px] border-[1px] flex relative currency-container-dont-close`}

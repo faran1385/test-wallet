@@ -5,6 +5,7 @@ import {Wallet} from "../components/ui/Wallet/Wallet.tsx";
 import TestPage from "../testPage.tsx";
 import {WalletLayout} from "../layouts/WalletLayout/WalletLayout.tsx";
 import {ManageAssets} from "../components/ui/ManageAssets/ManageAssets.tsx";
+import {Send} from "../components/ui/Send/Send.tsx";
 
 const routes = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
             {
                 path: "wallet/manage-assets",
                 element: <ManageAssets/>,
+            },
+            {
+                path: "wallet/send/:category/:id",
+                element: <Send/>,
             }
         ]
     }

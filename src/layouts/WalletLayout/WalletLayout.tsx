@@ -7,11 +7,11 @@ export const WalletLayout = () => {
 
     return <div className={"w-full h-dvh flex flex-col"}>
         <WalletHeader
-            additionalClasses={`${pathname.includes('manage-assets') ? 'hidden sm:block' : ''}`}
+            additionalClasses={`${pathname.includes('manage-assets') || pathname.includes("send") ? 'hidden sm:block' : ''}`}
         />
         <Outlet/>
         <MobileWalletNavigation
-            additionalClasses={`${pathname.includes('manage-assets') ? 'hidden' : ''}`}
+            additionalClasses={`${pathname.includes('manage-assets') || pathname.includes("send") ? 'hidden' : ''}`}
         />
     </div>
 }

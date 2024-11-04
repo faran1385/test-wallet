@@ -1,0 +1,9 @@
+.send-asset-content {
+    max-height: calc(100vh - 240px)
+}
+
+@media (min-width: 640px) {
+    .send-asset-content {
+        max-height: calc(100vh - 320px)
+    }
+}
