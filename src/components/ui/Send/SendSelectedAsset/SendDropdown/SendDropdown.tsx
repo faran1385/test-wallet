@@ -23,7 +23,7 @@ export const SendDropdown = (T: SendDropdownProps) => {
     return <div
         ref={container}
         style={{transition: "opacity .3s ease-in-out,transform .3s ease-in-out",maxHeight:'calc(100% - 100px)'}}
-        className={`absolute send-asset-dropdown ${T.isDropdownOpen ? 'translate-y-0 opacity-100 ' : 'opacity-0 translate-y-[50px] pointer-events-none'} z-[4] send-container-dont-close h-full top-[90px] overflow-y-auto cursor-default space-y-2 shadow-2xl p-3 left-[-3px] w-full bg-[#e5e7eb] rounded`}>
+        className={`absolute send-asset-dropdown ${T.isDropdownOpen ? 'translate-y-0 opacity-100 ' : 'opacity-0 -translate-y-[50px] pointer-events-none'} z-[4] send-container-dont-close h-full top-[90px] overflow-y-auto cursor-default space-y-2 shadow-2xl p-3 left-[-3px] w-full bg-[#e5e7eb] rounded`}>
         {assets.map((item, i) => {
             return <SendDropdownItem {...item} key={i}/>
         })}
