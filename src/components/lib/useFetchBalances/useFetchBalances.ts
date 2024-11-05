@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export function useFetchBalances(payload: any) {
+export function useFetchBalances(payload: any,type:any) {
   const [loading, setLoading] = useState(true);
   const [balances, setBalances] = useState<any>([]);
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +42,7 @@ export function useFetchBalances(payload: any) {
       }
     };
 
-    fetchBalances();
+    type != "manage" && fetchBalances();
   }, []);
 
   return { loading, balances, error };

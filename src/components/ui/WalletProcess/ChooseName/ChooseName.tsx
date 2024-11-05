@@ -228,7 +228,7 @@ export const ChooseName = () => {
                             //     .catch((err: any) => {
                             //         console.log("err", err);
                             //     });
-                            navigator('/test')
+                            navigator('/wallet')
                         })
                         .catch((err: any) => {
                             console.log("err", err);

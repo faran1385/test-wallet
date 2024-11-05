@@ -36,12 +36,18 @@ export type manageAsset = {
   transaction: any | null;
   uniqGetId: string;
   unitPrice: number | null;
+  assetNetworkId: number;
+  logoUrl: string;
+  blockChain:string;
+  isActive: boolean;
+
 };
 export interface MainAssetProps {
   usage: "main";
   req: manageAsset;
   networkType: string;
   address: string;
+  
 }
 
 // manage-asset
@@ -51,4 +57,5 @@ export interface ManageAssetProps {
   req: manageAsset;
   networkType: string;
   address: string;
+
 }

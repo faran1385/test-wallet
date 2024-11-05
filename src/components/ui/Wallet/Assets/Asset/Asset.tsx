@@ -5,15 +5,14 @@ import { AssetSwitcher } from "./AssetSwitcher/AssetSwitcher.tsx";
 import { useFetchBalances } from "../../../../lib/useFetchBalances/useFetchBalances.ts";
 
 export const Asset: React.FC<MainAssetProps | ManageAssetProps> = (T) => {
-  const {balances} = useFetchBalances({
+  const { balances } = useFetchBalances({
     walletId: localStorage.getItem("walletId"),
     NetworkType: "testnet",
     Blockchain: T.req.blockchain,
     ContractId: T.req.contaractAddress,
     Address: T.address,
     ApiId: T.req.apiId,
-  });
-console.log('loaddinssg',balances)
+  },T.usage);
   if (T.usage === "manage") {
     return (
       <>
@@ -26,31 +25,28 @@ console.log('loaddinssg',balances)
           <div className="w-full items-center gap-3 inline-flex">
             <div className="flex grow justify-start items-center gap-3">
               <div className="w-10 h-10 rounded-[20px] flex justify-center items-center">
-                <img src={T.req?.imageUrl} alt="" />
+                <img src={T.req?.logoUrl} alt="" />
               </div>
-              <div className="flex-col justify-start sm:items-center gap-1.5 inline-flex">
+              <div className="flex-col justify-start sm:items-center gap-1.5 inline-">
                 <div className="justify-start items-start gap-2 inline-flex">
                   <div className="text-black text-base font-medium leading-tight tracking-tight">
-                    {T.req.name}
+                    {T.req.name} {T.req.caption}
                   </div>
                   <div className="hidden sm:flex px-1.5 py-0.5 bg-[#ebeef1] rounded justify-center items-center gap-2.5">
                     <div className="text-black text-[10px] font-semibold leading-[14px] tracking-tight">
-                      {/* {T.req.category} */}
-                      category
+                      {T.req.blockChain}
+                     
                     </div>
                   </div>
                 </div>
                 <div className="text-[#686d74] text-xs leading-none tracking-tight">
                   <div className="text-[#686d74] text-xs leading-none tracking-tight flex sm:gap-1">
-                    {formatNumberWithCommas(T.req.unitPrice)}12
-                    <span className="hidden sm:inline-block">
-                      {T.req.currencyName}
-                    </span>
+                  {T.req.symbol}
                   </div>
                 </div>
               </div>
             </div>
-            <AssetSwitcher />
+            <AssetSwitcher value={T.req.isActive} />
           </div>
         </div>
       </>
@@ -86,7 +82,7 @@ console.log('loaddinssg',balances)
               </div>
               <div className="text-[#686d74] text-xs leading-none tracking-tight">
                 <div className="text-[#686d74] text-xs leading-none tracking-tight flex sm:gap-1">
-                  {balances?.balances[0]?.unitPrice}
+                  {balances?.balances && balances?.balances[0]?.unitPrice}
                   <span className="hidden sm:inline-block">
                     {balances?.currencyName}
                   </span>
@@ -103,10 +99,15 @@ console.log('loaddinssg',balances)
             </div>
             <div className="inline-flex flex-col justify-center items-end gap-1.5">
               <span className="text-right text-black text-base font-medium leading-tight tracking-tight">
-                {formatNumberWithCommas(balances?.balances[0]?.balance)}
+                {balances?.balances &&
+                  formatNumberWithCommas(balances?.balances[0]?.balance)}
               </span>
               <span className="text-right text-[#686d74] text-xs font-normal leading-none tracking-tight">
-                {Number(formatNumberWithCommas(balances?.balances[0]?.inUsd))?.toFixed(2)} {balances?.currencyName}
+                {balances?.balances &&
+                  Number(
+                    formatNumberWithCommas(balances?.balances[0]?.inUsd)
+                  )?.toFixed(2)}{" "}
+                {balances?.currencyName}
               </span>
             </div>
           </div>
